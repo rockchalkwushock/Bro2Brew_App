@@ -22,15 +22,17 @@
         <div class="row">
           <div class="col-xs-12">
             <h2>col-xs-12: input container</h2>
-            <form class="" action="index.html" method="post">
+            <form class="input_form" action="index.html" method="post">
               <label for="location">Search by city or zipcode:</label>
-              <input id="location"type="text" name="location" value="">
+              <!-- <input id="location"type="text" name="location" autocomplete="on text"> -->
+              <input type="text" id="ajax" list="json-datalist" placeholder="e.g. datalist">
+              <datalist id="json-datalist"></datalist>
               <button type="submit" name="button">Cheers!</button>
             </form>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
+          <div id="map" class="col-xs-12 map-container">
             <h2>col-xs-12: map container</h2>
           </div>
         </div>
@@ -57,5 +59,10 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     	<!-- Local Scripts -->
     	<script type="text/javascript" src="assets/js/app.js"></script>											<!-- contains primary JS -->
+    <!-- API Sources -->
+      <!-- Google Maps API -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATonHiYZ8w_5Ktnp_YColG3AlX6XPv4vs&callback=initMap" async defer></script>
+      <!-- Brewery DB API -->
+      <!-- <script src="http://api.brewerydb.com/v2/?key=1de3acbfb6c422aeb49ba422b07062f4"></script> -->
   </body>
 </html>

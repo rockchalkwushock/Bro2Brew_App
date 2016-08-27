@@ -13,3 +13,9 @@ body
   border: 0.25em solid black;
   padding: 1em;
 }
+
+.map-container
+{
+  height: 200px;
+  width: 200px;
+}
