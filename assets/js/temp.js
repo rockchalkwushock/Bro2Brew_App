@@ -14,7 +14,7 @@ function initLoad()
   {
     refreshList();
 
-    url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=&types='items' ' + '(cities)&language=pt_BR&key=AIzaSyATonHiYZ8w_5Ktnp_YColG3AlX6XPv4vs';
+    url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=&types='+''items''+'(cities)&language=pt_BR&key=AIzaSyATonHiYZ8w_5Ktnp_YColG3AlX6XPv4vs';
     $.getJSON()
   });
 
@@ -28,7 +28,7 @@ function initLoad()
         // At this point userInput is a string (no matter if integer input).
         validateInput(); // call function.
 
-        map = new google.maps.Map(document.getElementById('map'))
+        map = new google.maps.Map(document.getElementById('map'));
     });
 }
 

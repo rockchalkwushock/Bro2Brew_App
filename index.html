@@ -19,33 +19,16 @@
     <div class="wrapper">
       <div class="header"><h1>Bro2Brew</h1></div>
       <div class="contianer">
-        <div class="row">
-          <div class="col-xs-12">
+        <div class="row search-row">
+          <div class="col-xs-12 input-container">
             <h2>col-xs-12: input container</h2>
-            <form class="input_form" action="index.html" method="post">
-              <label for="location">Search by city or zipcode:</label>
-              <!-- <input id="location"type="text" name="location" autocomplete="on text"> -->
-              <input type="text" id="ajax" list="json-datalist" placeholder="e.g. datalist">
-              <datalist id="json-datalist"></datalist>
-              <button type="submit" name="button">Cheers!</button>
-            </form>
+            <h2>Search for Local Breweries</h2>
+            <button class="submit-btn" type="submit" name="button">Cheers!</button>
           </div>
         </div>
-        <div class="row">
+        <div class="row map-row">
           <div id="map" class="col-xs-12 map-container">
             <h2>col-xs-12: map container</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <h2>col-xs-12: list of results container</h2>
-            <ul>
-              <li class="brew1">Brewery Result #1</li>
-              <li class="brew2">Brewery Result #2</li>
-              <li class="brew3">Brewery Result #3</li>
-              <li class="brew4">Brewery Result #4</li>
-              <li class="brew5">Brewery Result #5</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -60,8 +43,8 @@
     	<!-- Local Scripts -->
     	<script type="text/javascript" src="assets/js/app.js"></script>											<!-- contains primary JS -->
     <!-- API Sources -->
-      <!-- Google Maps API -->
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATonHiYZ8w_5Ktnp_YColG3AlX6XPv4vs&callback=initMap" async defer></script>
+      <!-- Google Maps JavaScript API -->
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM&callback=initMap"></script>
       <!-- Brewery DB API -->
       <!-- <script src="http://api.brewerydb.com/v2/?key=1de3acbfb6c422aeb49ba422b07062f4"></script> -->
   </body>
