@@ -16,10 +16,6 @@ body
 {
   margin: auto;
 }
-.container
-{
-  margin: auto;
-}
 .header
 {
   text-align: center;
@@ -35,7 +31,8 @@ body
 }
 .map-container
 {
+  margin: 0 auto,
   text-align: center;
-  height: 200px;
-  width: 200px;
+  height: 400px;
+  width: 400px;
 }

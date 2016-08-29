@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Meta Data -->
-    <meta charset="utf-8" name="-------------------------">
+    <meta charset="utf-8" name="Brow2Brew">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<meta name="description" content="Finding local breweries in your area.">
     <!-- Title in SEO & Browser -->
@@ -21,14 +21,12 @@
       <div class="contianer">
         <div class="row search-row">
           <div class="col-xs-12 input-container">
-            <h2>col-xs-12: input container</h2>
             <h2>Search for Local Breweries</h2>
             <button class="submit-btn" type="submit" name="button">Cheers!</button>
           </div>
         </div>
         <div class="row map-row">
           <div id="map" class="col-xs-12 map-container">
-            <h2>col-xs-12: map container</h2>
           </div>
         </div>
       </div>
@@ -42,10 +40,9 @@
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     	<!-- Local Scripts -->
     	<script type="text/javascript" src="assets/js/app.js"></script>											<!-- contains primary JS -->
+      <script type="text/javascript" src="assets/js/map.js"></script>
     <!-- API Sources -->
       <!-- Google Maps JavaScript API -->
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM&callback=initMap"></script>
-      <!-- Brewery DB API -->
-      <!-- <script src="http://api.brewerydb.com/v2/?key=1de3acbfb6c422aeb49ba422b07062f4"></script> -->
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM&libraries=places"></script>
   </body>
 </html>
