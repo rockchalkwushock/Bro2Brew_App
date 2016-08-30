@@ -30,6 +30,7 @@
 
 var mainScreen = $('.search-row');
 var mapScreen = $('.map-row');
+var resultsScreen = $('.results-row');
 
 /* ---------- b) Local ---------- */
 
@@ -80,6 +81,7 @@ function initLoad()
 {
   mainScreen.show();  // Only input-container is visible.
   mapScreen.hide();   // map-container hidden.
+  resultsScreen.hide();
   $('.submit-btn').click(function()
   {
     mainScreen.hide();  // Hide input-container.

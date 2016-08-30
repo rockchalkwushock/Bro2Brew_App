@@ -1,5 +1,5 @@
 // window.onload = getMyLocation;
-
+var resultsScreen = $('.results-row');
 var map;
 
 // This function checks that geolocation is available in the user's browser.
@@ -72,6 +72,7 @@ function callback(results, status)
   {
     for (var i = 0; i < results.length; i++)
     {
+      console.log(results[i]);
       var place = results[i];
       apiMarkerCreate(place.geometry.location, place);
     }
@@ -80,35 +81,33 @@ function callback(results, status)
 
 function apiMarkerCreate(latLng, placeResult)
 {
+  if(!placeResult) return;
   var markerOptions =
   {
     // Google Places REQUIRES Lat & Long coords to place marker at XYZ.
-    placeId: place_id,
+    place_id: placeResult.place_id,
     position: latLng,
     map: map,
     animation: google.maps.Animation.DROP,
-    place:
-    {
-      name: name,
-      address: formatted_address,
-      hours: opening_hours,
-      phone: formatted_phone_number,
-      url: url,
-    },
-    // clickable: true
+    name: placeResult.name,
+    // formatted_address: placeResult.formatted_address,
+    opening_hours: placeResult.opening_hours,
+    formatted_phone_number: placeResult.formatted_phone_number,
+    url: placeResult.url,
+    clickable: true
   };
 
   // Setting up the marker object to mark the location on the map canvas.
   var marker = new google.maps.Marker(markerOptions);
-
+  var content;
   if (placeResult)
   {
-    var content = placeResult.name + '<br/>' + placeResult.vicinity + '<br/>';
+    content = placeResult.name + '<br/>' + placeResult.vicinity + '<br/>';
     windowInfoCreate(marker, latLng, content);
   }
   else
   {
-    var content = 'You are here: '+ latLng.lat() + ', ' + latLng.lng();
+    content = 'You are here: '+ latLng.lat() + ', ' + latLng.lng();
     windowInfoCreate(marker, latLng, content);
   }
 }
@@ -132,4 +131,7 @@ function windowInfoCreate(marker, latLng, content)
       infoWindow.close();
   });
 
+  marker.addListener('click', function() {
+      resultsScreen.show();
+  });
 }

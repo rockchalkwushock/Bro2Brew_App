@@ -18,7 +18,7 @@
   <body>
     <div class="wrapper">
       <div class="header"><h1>Bro2Brew</h1></div>
-      <div class="contianer">
+      <div class="container">
         <div class="row search-row">
           <div class="col-xs-12 input-container">
             <h2>Search for Local Breweries</h2>
@@ -27,6 +27,17 @@
         </div>
         <div class="row map-row">
           <div id="map" class="col-xs-12 map-container">
+          </div>
+        </div>
+        <div class="row results-row">
+          <div class="col-xs-12 results-container">
+            <h2 id="result-name">Results Div</h2>
+            <ul class="results-list">
+              <li>Address: <span id='result-address'></span></li>
+              <li>Hours: <span id='result-hours'></span></li>
+              <li>Phone Number: <span id='result-phone'></span></li>
+              <li>Website: <span id='result-url'></span></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -44,5 +55,8 @@
     <!-- API Sources -->
       <!-- Google Maps JavaScript API -->
       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM&libraries=places"></script>
+      <!-- Brewery DB API -->
+      <!-- <script src="http://api.brewerydb.com/v2/?key=1de3acbfb6c422aeb49ba422b07062f4&brewery/KRB0Bo/locations"></script> -->
+
   </body>
 </html>
