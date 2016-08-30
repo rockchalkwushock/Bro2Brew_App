@@ -34,21 +34,20 @@ body
 .map-row
 {
   margin: 0 auto;
-  height: 100%;
+  height: 50%;
 
   text-align: center;
   display: table;
 }
 .map-container
 {
-  border: .25em solid black;
   width: 400px;
   height: 400px;
 }
 .results-row
 {
   margin: 0 auto;
-  height: 100%;
+  height: 50%;
   display: table;
 }
 .results-container

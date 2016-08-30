@@ -85,15 +85,10 @@ function apiMarkerCreate(latLng, placeResult)
   var markerOptions =
   {
     // Google Places REQUIRES Lat & Long coords to place marker at XYZ.
-    place_id: placeResult.place_id,
     position: latLng,
     map: map,
-    animation: google.maps.Animation.DROP,
-    name: placeResult.name,
-    // formatted_address: placeResult.formatted_address,
-    opening_hours: placeResult.opening_hours,
-    formatted_phone_number: placeResult.formatted_phone_number,
-    url: placeResult.url,
+    animation: google.maps.Animation.DROP, // no drop just show.
+    name: name,
     clickable: true
   };
 
@@ -102,7 +97,7 @@ function apiMarkerCreate(latLng, placeResult)
   var content;
   if (placeResult)
   {
-    content = placeResult.name + '<br/>' + placeResult.vicinity + '<br/>';
+    content = placeResult.name + /*'<br/>' + placeResult.vicinity + */'<br/>';
     windowInfoCreate(marker, latLng, content);
   }
   else
@@ -134,4 +129,9 @@ function windowInfoCreate(marker, latLng, content)
   marker.addListener('click', function() {
       resultsScreen.show();
   });
+}
+
+function appendResults()
+{
+  'https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJGaSSKr7juocRobymZWW0gXE&key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM'
 }
