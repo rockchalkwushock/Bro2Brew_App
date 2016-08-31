@@ -5,9 +5,14 @@ var map;
 // This function checks that geolocation is available in the user's browser.
 function getMyLocation()
 {
+  console.log('in getMyLocation');
   if(navigator.geolocation)
   {
-    navigator.geolocation.getCurrentPosition(displayLocation);
+    console.log('if');
+    navigator.geolocation.getCurrentPosition(displayLocation, function(ever){
+      console.log(ever);
+    });
+    console.log('display');
   }
   else
   {
@@ -18,6 +23,7 @@ function getMyLocation()
 // This function actually invokes the geolocation feature.
 function displayLocation(position)
 {
+  console.log('in displayLocation');
   // The Lat & Long values are obtained via the HTML 5 API.
   var latitude = position.coords.latitude;
   var longitude = position.coords.longitude;
@@ -36,13 +42,14 @@ function displayLocation(position)
 // Renders the map to DOM.
 function showMap(latLng)
 {
+  console.log('in showMap');
   // Setting up availble option for map.
   var mapOptions =
   {
     center: latLng,
     zoom: 11,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    draggable: true,
+    draggable: false,
     scrollwheel: false,
     disableDefaultUI: true,
   };
@@ -53,6 +60,7 @@ function showMap(latLng)
 
 function addNearbyPlaces(latLng)
 {
+  console.log('in addNearbyPlaces');
   var request =
   {
     // Google Places REQUIRES Lat & Long coords to find XYZ.
@@ -68,18 +76,20 @@ function addNearbyPlaces(latLng)
 
 function callback(results, status)
 {
+  console.log('in callback');
   if (status == google.maps.places.PlacesServiceStatus.OK)
   {
     for (var i = 0; i < results.length; i++)
     {
-      // console.log(results[i]);
+      console.log(results[i]);
       var place = results[i];
-      var placeid = place.place_id;
-      apiMarkerCreate(place.geometry.location, place);
-      apiGetDetails(placeid);
+      placeid = place.place_id;
+      var marker = apiMarkerCreate(place.geometry.location, place);
+      apiGetDetails(placeid, marker);
     }
   }
 }
+
 
 function apiMarkerCreate(latLng, placeResult)
 {
@@ -100,17 +110,20 @@ function apiMarkerCreate(latLng, placeResult)
   if (placeResult)
   {
     content = placeResult.name + /*'<br/>' + placeResult.vicinity + */'<br/>';
-    windowInfoCreate(marker, latLng, content);
+    windowInfoCreate(marker, latLng, content, brewery_info);
   }
   else
   {
+
     content = 'You are here: '+ latLng.lat() + ', ' + latLng.lng();
-    windowInfoCreate(marker, latLng, content);
+    windowInfoCreate(marker, latLng, content, brewery_info);
   }
+  return marker;
 }
 
-function apiGetDetails(brewery_id)
+function apiGetDetails(brewery_id, marker)
 {
+  // parameters to pass to url for finding place_id JSON
   var parameters =
   {
     placeid: brewery_id,
@@ -124,31 +137,24 @@ function apiGetDetails(brewery_id)
     {
       console.log(receivedApiData);
       // if nothing alert not found.
-      if (receivedApiData.status !== "OK")
+      if (receivedApiData.pageInfo.totalResults === 0)
       {
         alert("Not Found.");
       }
       // else... call the creation of the JSON data to be rendered to user.
       else
       {
-        apiDetailsCreate(receivedApiData.result);
+        marker.addListener('click', function() {
+            resultsScreen.show();
+            // apiDetailsCreate(receivedApiData.items);
+            console.log(receivedApiData);
+        });
       }
     });
 }
 
-function apiDetailsCreate(brewery_data)
-{
-  console.log('creating the details');
-  // var span = $('.template span').clone();
-  // span.find('.formatted_address').html();
-  // span.find('.weekday_text').html(); // this is an array
-  // span.find('.formatted_phone_number').html();
-  // span.find('.formatted_address').html();
-}
 
-
-
-function windowInfoCreate(marker, latLng, content)
+function windowInfoCreate(marker, latLng, content, brewery_info)
 {
   var infoWindowOptions =
   {
@@ -165,9 +171,5 @@ function windowInfoCreate(marker, latLng, content)
   // assuming you also want to hide the infowindow when user mouses-out
   marker.addListener('mouseout', function() {
       infoWindow.close();
-  });
-
-  marker.addListener('click', function() {
-      resultsScreen.show();
   });
 }
