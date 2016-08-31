@@ -122,7 +122,7 @@ function apiGetDetails(brewery_id)
   $.getJSON(url, parameters,
     function(receivedApiData)
     {
-      console.log(receivedApiData);
+      // console.log(receivedApiData);
       // if nothing alert not found.
       if (receivedApiData.status !== "OK")
       {
@@ -132,15 +132,24 @@ function apiGetDetails(brewery_id)
       else
       {
         apiDetailsCreate(receivedApiData.result);
+        // console.log(receivedApiData.result);
       }
     });
 }
 
 function apiDetailsCreate(brewery_data)
 {
-  console.log('creating the details');
+  // console.log('creating the details');
+  console.log(brewery_data.name);
+  console.log(brewery_data.vicinity);
+  console.log(brewery_data.types);
+  // console.log(brewery_data.formatted_phone_number);
+  // console.log(brewery_data.opening_hours.weekday_text);
+  // console.log(brewery_data.opening_hours.open_now);
+  // console.log(brewery_data.website);
+  // console.log(brewery_data.rating);
   // var span = $('.template span').clone();
-  // span.find('.formatted_address').html();
+  // span.find('.result-address').html();
   // span.find('.weekday_text').html(); // this is an array
   // span.find('.formatted_phone_number').html();
   // span.find('.formatted_address').html();
