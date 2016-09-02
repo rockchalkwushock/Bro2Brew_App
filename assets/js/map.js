@@ -58,7 +58,9 @@ function addNearbyPlaces(latLng)
     // Google Places REQUIRES Lat & Long coords to find XYZ.
     location: latLng,
     radius: 10936,
-    keyword: ['breweries'],
+    // Returing results that are not breweries.
+    // aka. McDonald's, bars, liquor stores, Applebee's, distilleries.
+    keyword: ['breweries'], // keyword to search for in Google Places Library.
   };
 
   var nearByService = new google.maps.places.PlacesService(map);
@@ -66,6 +68,8 @@ function addNearbyPlaces(latLng)
   nearByService.nearbySearch(request, callback);
 }
 
+// This function scans the Google Places Library for 'breweries' checking first
+// that the status of the location is 'OK'
 function callback(results, status)
 {
   if (status == google.maps.places.PlacesServiceStatus.OK)
@@ -78,9 +82,15 @@ function callback(results, status)
       apiMarkerCreate(place.geometry.location, place);
       apiGetDetails(placeid);
     }
+    return true;
+  }
+  else
+  {
+      return false;
   }
 }
 
+// This function will create the marker pertaining to the results of the search.
 function apiMarkerCreate(latLng, placeResult)
 {
   if(!placeResult) return;
@@ -89,7 +99,7 @@ function apiMarkerCreate(latLng, placeResult)
     // Google Places REQUIRES Lat & Long coords to place marker at XYZ.
     position: latLng,
     map: map,
-    animation: google.maps.Animation.DROP, // no drop just show.
+    animation: google.maps.Animation.DROP, // CHANGE: no drop just show.
     name: name,
     clickable: true
   };
@@ -109,6 +119,7 @@ function apiMarkerCreate(latLng, placeResult)
   }
 }
 
+// This function will get the JSON for the results of the search.
 function apiGetDetails(brewery_id)
 {
   var parameters =
@@ -137,6 +148,7 @@ function apiGetDetails(brewery_id)
     });
 }
 
+// This function will append the specific marker/result's details to the results-container.
 function apiDetailsCreate(brewery_data)
 {
   // console.log('creating the details');
