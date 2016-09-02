@@ -17,7 +17,7 @@
 *     a) initLoad( )
 *     b)
 * 6)  Validation Checks
-*     a)
+*     a) validateInput( )
 *     b)
 * 7)  App.js Execution
 */
@@ -28,7 +28,9 @@
 
 /* ---------- a) Global ---------- */
 
-
+var mainScreen = $('.search-row');
+var mapScreen = $('.map-row');
+var resultsScreen = $('.results-row');
 
 /* ---------- b) Local ---------- */
 
@@ -77,7 +79,15 @@
 /* ---------- a) initLoad ---------- */
 function initLoad()
 {
-
+  mainScreen.show();  // Only input-container is visible.
+  mapScreen.hide();   // map-container hidden.
+  resultsScreen.hide();
+  $('.submit-btn').click(function()
+  {
+    mainScreen.hide();  // Hide input-container.
+    mapScreen.show();   // Show map-container.
+    getMyLocation();  // Process user's physical location using geolocation.
+  });
 }
 
 /* ---------- b)  ---------- */

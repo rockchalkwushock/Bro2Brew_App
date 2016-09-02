@@ -11,3 +11,10 @@ Simplistic design and integration along with a sleek UX leaves it in a category 
 ### API's
   * Brewery DB API <http://www.brewerydb.com/developers/docs>
   * Google Maps API <https://developers.google.com/maps/documentation/embed/>
+
+### Mockup of Initial Design Concept
+
+![Main Screen](https://github.com/rockchalkwushock/Bro2Brew_App/blob/gh-pages/assets/mockups/Main%20Screen.png " Main Screen of App")
+
+
+![Location Screen](https://github.com/rockchalkwushock/Bro2Brew_App/blob/gh-pages/assets/mockups/Location%20Screen.png " Location Screen of App")

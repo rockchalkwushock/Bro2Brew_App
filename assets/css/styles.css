@@ -5,11 +5,54 @@ html
   margin: 0 auto;
   border: 0;
   padding: 0;
+  height: 100%;
 }
-
 body
 {
   margin: 1em;
-  border: 0.25em solid black;
-  padding: 1em;
+  height: 100%;
+}
+.wrapper
+{
+  margin: auto;
+  height: 100%;
+}
+.header
+{
+  font-size: 4em;
+  /*margin-bottom: 1em;*/
+  text-align: center;
+}
+.container
+{
+  height: 100%;
+}
+.input-container
+{
+  text-align: center;
+}
+.map-row
+{
+  margin: 0 auto;
+  height: 50%;
+
+  text-align: center;
+  display: table;
+}
+.map-container
+{
+  width: 400px;
+  height: 400px;
+}
+.results-row
+{
+  margin: 0 auto;
+  height: 50%;
+  display: table;
+}
+.template
+{
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
 }
