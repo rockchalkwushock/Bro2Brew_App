@@ -1,6 +1,35 @@
-// window.onload = getMyLocation;
+// ########################################
+/*
+*	Table of Contents
+*	1)	Initialization of Variables
+*     a)  Global
+*     b)  Local (with location)
+*	2)	Geolocation Code
+*     a) getMyLocation( )
+*     b) displayLocation( )
+*	3)	The Map
+*     a) showMap( )
+*	4)	Google Places Library Calls
+*     a) addNearbyPlaces( )
+*     b) callback( )
+* 5)  Markers
+*     a) apiMarkerCreate
+* 6)  Event Handlers & Info Box
+*     a) windowInfoCreate( )
+*/
+
+// ####################################################
+/* ---------- Initialization of Variables ---------- */
+// ####################################################
+
 var resultsScreen = $('.results-row');
 var map;
+
+// #########################################
+/* ---------- Geolocation Code ---------- */
+// #########################################
+
+/* ---------- getMyLocation ---------- */
 
 // This function checks that geolocation is available in the user's browser.
 function getMyLocation()
@@ -14,6 +43,8 @@ function getMyLocation()
     alert('Sorry, geolocation is not supported in your browser.');
   }
 }
+
+/* ---------- displayLocation ---------- */
 
 // This function actually invokes the geolocation feature.
 function displayLocation(position)
@@ -33,6 +64,12 @@ function displayLocation(position)
   apiMarkerCreate(latLng);
 }
 
+// ################################
+/* ---------- The Map ---------- */
+// ################################
+
+/* ---------- showMap ---------- */
+
 // Renders the map to DOM.
 function showMap(latLng)
 {
@@ -51,6 +88,13 @@ function showMap(latLng)
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
 
+
+// ####################################################
+/* ---------- Google Places Library Calls ---------- */
+// ####################################################
+
+/* ---------- addNearbyPlaces ---------- */
+
 function addNearbyPlaces(latLng)
 {
   var request =
@@ -63,25 +107,33 @@ function addNearbyPlaces(latLng)
     keyword: ['breweries'], // keyword to search for in Google Places Library.
   };
 
-  // Accessing PlacesService Library through the Constructor PlacesService.
+  // Accessing PlacesService Library through the Constructor PlacesService
+  // by creating new instance of object called nearByService.
   var nearByService = new google.maps.places.PlacesService(map);
   // Using prototype nearbySearch from Constructor PlacesService.
-  nearByService.nearbySearch(request, callback);
+  nearByService.nearbySearch(request, CallbackResults);
 }
+
+/* ---------- callback ---------- */
 
 // This function scans the Google Places Library for 'breweries' checking first
 // that the status of the location is 'OK'
-function callback(results, status)
+function callbackResults(results, status)
 {
   if (status == google.maps.places.PlacesServiceStatus.OK)
   {
     for (var i = 0; i < results.length; i++)
     {
-      // console.log(results[i]);
       var place = results[i];
       var placeid = place.place_id;
-      apiMarkerCreate(place.geometry.location, place);
-      apiGetDetails(placeid);
+      var name = place.name;
+
+      if (name.includes("Brewery") || name.includes("Brewing"))
+      {
+        // console.log(name);
+        apiMarkerCreate(place.geometry.location, place);
+        addPlaceDetails(placeid);
+      }
     }
     return true;
   }
@@ -91,7 +143,12 @@ function callback(results, status)
   }
 }
 
-// This function will create the marker pertaining to the results of the search.
+// ################################
+/* ---------- Markers ---------- */
+// ################################
+
+/* ---------- apiMarkerCreate ---------- */
+
 function apiMarkerCreate(latLng, placeResult)
 {
   if(!placeResult) return;
@@ -120,38 +177,53 @@ function apiMarkerCreate(latLng, placeResult)
   }
 }
 
+// ################################
+/* ---------- Details ---------- */
+// ################################
+
+/* ---------- addPlaceDetails ---------- */
+
 // This function will get the JSON for the results of the search.
-function apiGetDetails(brewery_id)
+function addPlaceDetails(brewery_id)
 {
   var parameters =
   {
-    placeid: brewery_id,
-    key: 'AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM',
+    placeId: brewery_id,
   };
-  url = 'https://maps.googleapis.com/maps/api/place/details/json?parameters';
 
-  // retrieving JSON for specific place_id.
-  $.getJSON(url, parameters,
-    function(receivedApiData)
-    {
-      // console.log(receivedApiData);
-      // if nothing alert not found.
-      if (receivedApiData.status !== "OK")
-      {
-        alert("Not Found.");
-      }
-      // else... call the creation of the JSON data to be rendered to user.
-      else
-      {
-        apiDetailsCreate(receivedApiData.result);
-        // console.log(receivedApiData.result);
-      }
-    });
+  // Accessing PlacesService Library through the Constructor PlacesService
+  // by creating new instance of object called serviceDetails.
+  var serviceDetails = new google.maps.places.PlacesService(map);
+  // Using prototype nearbySearch from Constructor PlacesService.
+  serviceDetails.getDetails(parameters, callbackDetails);
 }
+
+function callbackDetails(brewery_data)
+{
+  marker.addListener('click', function()
+  {
+    var span = $('.template span').clone();
+    span.find('.result-name').html(brewery_data.name);
+    span.find('.result-rating').html(brewery_data.rating);
+    span.find('.result-address').html(brewery_data.vicinity);
+    span.find('.result-hours').html(brewery_data.opening_hours.weekday_text); // this is an array
+    span.find('.result-phone').html(brewery_data.formatted_phone_number);
+    span.find('.result-url').html(brewery_data.website);
+    $("#results-container").append(span);
+    resultsScreen.show();
+  });
+
+}
+
+
+
+
+
 
 // This function will append the specific marker/result's details to the results-container.
 function apiDetailsCreate(brewery_data)
 {
+
   // console.log('creating the details');
   console.log(brewery_data.name);
   console.log(brewery_data.vicinity);
@@ -169,6 +241,19 @@ function apiDetailsCreate(brewery_data)
 }
 
 
+
+
+
+
+
+
+
+
+// ##################################################
+/* ---------- Event Handlers & Info Box ---------- */
+// ##################################################
+
+/* ---------- windowInfoCreate ---------- */
 
 function windowInfoCreate(marker, latLng, content)
 {
@@ -189,7 +274,7 @@ function windowInfoCreate(marker, latLng, content)
       infoWindow.close();
   });
 
-  marker.addListener('click', function() {
-      resultsScreen.show();
-  });
+  // marker.addListener('click', function() {
+  //     resultsScreen.show();
+  // });
 }
