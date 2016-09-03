@@ -77,7 +77,7 @@ function showMap(latLng)
   var mapOptions =
   {
     center: latLng,
-    zoom: 11,
+    zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     draggable: true,
     scrollwheel: false,
@@ -102,16 +102,15 @@ function addNearbyPlaces(latLng)
     // Google Places REQUIRES Lat & Long coords to find XYZ.
     location: latLng,
     radius: 10936,
-    // Returing results that are not breweries.
-    // aka. McDonald's, bars, liquor stores, Applebee's, distilleries.
-    keyword: ['breweries'], // keyword to search for in Google Places Library.
+    // keyword to search for in Google Places Library.
+    keyword: ['breweries'],
   };
 
   // Accessing PlacesService Library through the Constructor PlacesService
   // by creating new instance of object called nearByService.
   var nearByService = new google.maps.places.PlacesService(map);
   // Using prototype nearbySearch from Constructor PlacesService.
-  nearByService.nearbySearch(request, CallbackResults);
+  nearByService.nearbySearch(request, callbackResults);
 }
 
 /* ---------- callback ---------- */
@@ -124,13 +123,13 @@ function callbackResults(results, status)
   {
     for (var i = 0; i < results.length; i++)
     {
+      // var breweryMarker = new BreweryMarkerResult(results[i]);
       var place = results[i];
       var placeid = place.place_id;
       var name = place.name;
 
       if (name.includes("Brewery") || name.includes("Brewing"))
       {
-        // console.log(name);
         apiMarkerCreate(place.geometry.location, place);
         addPlaceDetails(placeid);
       }
@@ -200,52 +199,23 @@ function addPlaceDetails(brewery_id)
 
 function callbackDetails(brewery_data)
 {
-  marker.addListener('click', function()
-  {
-    var span = $('.template span').clone();
-    span.find('.result-name').html(brewery_data.name);
-    span.find('.result-rating').html(brewery_data.rating);
-    span.find('.result-address').html(brewery_data.vicinity);
-    span.find('.result-hours').html(brewery_data.opening_hours.weekday_text); // this is an array
-    span.find('.result-phone').html(brewery_data.formatted_phone_number);
-    span.find('.result-url').html(brewery_data.website);
-    $("#results-container").append(span);
-    resultsScreen.show();
-  });
-
-}
-
-
-
-
-
-
-// This function will append the specific marker/result's details to the results-container.
-function apiDetailsCreate(brewery_data)
-{
-
-  // console.log('creating the details');
   console.log(brewery_data.name);
   console.log(brewery_data.vicinity);
-  console.log(brewery_data.types);
-  // console.log(brewery_data.formatted_phone_number);
-  // console.log(brewery_data.opening_hours.weekday_text);
-  // console.log(brewery_data.opening_hours.open_now);
-  // console.log(brewery_data.website);
-  // console.log(brewery_data.rating);
-  // var span = $('.template span').clone();
-  // span.find('.result-address').html();
-  // span.find('.weekday_text').html(); // this is an array
-  // span.find('.formatted_phone_number').html();
-  // span.find('.formatted_address').html();
+  console.log(brewery_data.opening_hours.open_now); // need to check.
+  console.log(brewery_data.opening_hours.weekday_text); // need to check.
+  console.log(brewery_data.formatted_phone_number);
+  console.log(brewery_data.website);
+
+  resultsScreen.show();
+  var span = $('.template span').clone();
+  span.find('#result-name').html(brewery_data.name);
+  span.find('#result-address').html(brewery_data.vicinity);
+  span.find('#result-hours').html();
+  span.find('#result-phone').html(brewery_data.formatted_phone_number);
+  span.find('#result-url').html(brewery_data.website);
+  $('.results-row #collapsible_panel ul').append(span);
+
 }
-
-
-
-
-
-
-
 
 
 
@@ -274,7 +244,7 @@ function windowInfoCreate(marker, latLng, content)
       infoWindow.close();
   });
 
-  // marker.addListener('click', function() {
-  //     resultsScreen.show();
-  // });
+  marker.addListener('click', function() {
+      resultsScreen.show();
+  });
 }
