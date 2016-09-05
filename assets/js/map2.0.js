@@ -3,7 +3,6 @@
 *	Table of Contents
 *	1)	Initialization of Variables
 *     a)  Global
-*     b)  Local (with location)
 *	2)	Geolocation Code
 *     a) getMyLocation( )
 *     b) displayLocation( )
@@ -14,6 +13,9 @@
 *     b) callback( )
 * 5)  Markers
 *     a) apiMarkerCreate
+* 5)  Places Details
+*     a) addPlaceDetails( )
+*     b) callbackDetails( )
 * 6)  Event Handlers & Info Box
 *     a) windowInfoCreate( )
 */
@@ -73,7 +75,7 @@ function displayLocation(position)
 // Renders the map to DOM.
 function showMap(latLng)
 {
-  // Setting up availble option for map.
+  // Setting up availble options for map.
   var mapOptions =
   {
     center: latLng,
@@ -127,7 +129,10 @@ function callbackResults(results, status)
       var place = results[i];
       var placeid = place.place_id;
       var name = place.name;
+      console.log(name + ' ' + placeid);
 
+      // TEMPORARY FIX: .includes( ) is not supported in IE (MDN).
+      // Also is not supported on mobile browsers: IE & Android.
       if (name.includes("Brewery") || name.includes("Brewing"))
       {
         apiMarkerCreate(place.geometry.location, place);
@@ -167,19 +172,15 @@ function apiMarkerCreate(latLng, placeResult)
   var content;
   if (placeResult)
   {
-    content = placeResult.name + /*'<br/>' + placeResult.vicinity + */'<br/>';
-    windowInfoCreate(marker, latLng, content);
-  }
-  else
-  {
-    content = 'You are here: '+ latLng.lat() + ', ' + latLng.lng();
+    // Displays name of brewery when marker is moused over.
+    content = placeResult.name;
     windowInfoCreate(marker, latLng, content);
   }
 }
 
-// ################################
-/* ---------- Details ---------- */
-// ################################
+// #######################################
+/* ---------- Places Details ---------- */
+// #######################################
 
 /* ---------- addPlaceDetails ---------- */
 
@@ -200,27 +201,49 @@ function addPlaceDetails(brewery_id)
 
 function callbackDetails(brewery_data)
 {
-  console.log(brewery_data.name);
-  console.log(brewery_data.vicinity);
-  // console.log(brewery_data.opening_hours.open_now); // need to check.
-  // console.log(brewery_data.opening_hours.weekday_text); // need to check.
-  console.log(brewery_data.formatted_phone_number);
-  console.log(brewery_data.website);
-
   resultsScreen.show();
   var span = $('.template .panel').clone();
   span.find('#result-name').html(brewery_data.name);
   span.find('#result-address').html(brewery_data.vicinity);
-  span.find('#result-hours').html();
   span.find('#result-phone').html(brewery_data.formatted_phone_number);
   span.find('#result-url').html(brewery_data.website);
   span.find('a').attr('href', '#collapse' + brewery_data.id);
   span.find('a').attr('id', 'linkcollapse' + brewery_data.id);
   span.find('.panel-collapse').attr('id', 'collapse' + brewery_data.id);
+  // if the brewery is open say 'Open Now' with day & hours.
+  if (brewery_data.opening_hours.open_now)
+  {
+    switch (new Date().getDay())
+    {
+      case 0: // Sunday
+          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[6]);
+          break;
+      case 1: // Monday
+          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[0]);
+          break;
+      case 2: // Tuesday
+          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[1]);
+          break;
+      case 3: // Wednesday
+          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[2]);
+          break;
+      case 4: // Thursday
+          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[3]);
+          break;
+      case 5: // Friday
+          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[4]);
+          break;
+      case 6: // Saturday
+          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[5]);
+    }
+  }
+  // else say closed now
+  else
+  {
+    span.find('#result-hours').html('Closed Now');
+  }
   $('.results-row #collapsible_panel').append(span);
 }
-
-
 
 // ##################################################
 /* ---------- Event Handlers & Info Box ---------- */

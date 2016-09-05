@@ -94,7 +94,6 @@ function initLoad()
     event.stopPropagation(); // check to see if this is needed. (look up what it does)
     event.preventDefault();
     $('html, body').animate({scrollTop: 0}, 1000);
-    console.log($(this));
     $(this).parent().parent().parent().find('.panel-title a').click();
     // console.log($(this).parent().parent().parent());
   });
