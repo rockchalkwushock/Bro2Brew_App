@@ -56,3 +56,7 @@ body
   width: 400px;
   height: 400px;
 }
+.hidden
+{
+  display: none;
+}

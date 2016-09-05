@@ -88,6 +88,16 @@ function initLoad()
     mapScreen.show();   // Show map-container.
     getMyLocation();  // Process user's physical location using geolocation.
   });
+
+  $('.results-row').on('click', '.back2top', function(event)
+  {
+    event.stopPropagation(); // check to see if this is needed. (look up what it does)
+    event.preventDefault();
+    $('html, body').animate({scrollTop: 0}, 1000);
+    console.log($(this));
+    $(this).parent().parent().parent().find('.panel-title a').click();
+    // console.log($(this).parent().parent().parent());
+  });
 }
 
 /* ---------- b)  ---------- */

@@ -163,6 +163,7 @@ function apiMarkerCreate(latLng, placeResult)
 
   // Setting up the marker object to mark the location on the map canvas.
   var marker = new google.maps.Marker(markerOptions);
+  marker.placeResult = placeResult;
   var content;
   if (placeResult)
   {
@@ -201,20 +202,22 @@ function callbackDetails(brewery_data)
 {
   console.log(brewery_data.name);
   console.log(brewery_data.vicinity);
-  console.log(brewery_data.opening_hours.open_now); // need to check.
-  console.log(brewery_data.opening_hours.weekday_text); // need to check.
+  // console.log(brewery_data.opening_hours.open_now); // need to check.
+  // console.log(brewery_data.opening_hours.weekday_text); // need to check.
   console.log(brewery_data.formatted_phone_number);
   console.log(brewery_data.website);
 
   resultsScreen.show();
-  var span = $('.template span').clone();
+  var span = $('.template .panel').clone();
   span.find('#result-name').html(brewery_data.name);
   span.find('#result-address').html(brewery_data.vicinity);
   span.find('#result-hours').html();
   span.find('#result-phone').html(brewery_data.formatted_phone_number);
   span.find('#result-url').html(brewery_data.website);
-  $('.results-row #collapsible_panel ul').append(span);
-
+  span.find('a').attr('href', '#collapse' + brewery_data.id);
+  span.find('a').attr('id', 'linkcollapse' + brewery_data.id);
+  span.find('.panel-collapse').attr('id', 'collapse' + brewery_data.id);
+  $('.results-row #collapsible_panel').append(span);
 }
 
 
@@ -235,16 +238,20 @@ function windowInfoCreate(marker, latLng, content)
 
   var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 
-  marker.addListener('mouseover', function() {
+  marker.addListener('mouseover', function()
+  {
       infoWindow.open(map, this);
   });
 
   // assuming you also want to hide the infowindow when user mouses-out
-  marker.addListener('mouseout', function() {
+  marker.addListener('mouseout', function()
+  {
       infoWindow.close();
   });
 
-  marker.addListener('click', function() {
-      resultsScreen.show();
+  marker.addListener('click', function()
+  {
+      $('#linkcollapse' + marker.placeResult.id).click();
+      $('html, body').animate({scrollTop: $('#linkcollapse' + marker.placeResult.id).offset().top}, 1000);
   });
 }
