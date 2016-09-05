@@ -1,68 +1,61 @@
-function refreshList() // receives response from API
+// I need to make a Constructor
+// This Constructor must be a protoype for an instance of the object that will
+// return both a marker & the details so they are connected.
+
+function BreweryMarkerResult(results[i])
 {
-  $('#json-datalist').empty();
-  for (var i = 0; i < items.length; i++)
+  this.place = results[i];
+  this.placeid = this.place.place_id;
+  this.name = this.place.name;
+}
+
+BreweryMarkerResult.prototype.apiMarkerCreate = function(latLng)
+{
+  if(!this.place) return;
+  var markerOptions =
   {
-    $('#json-datalist').append("<option value='" + items[i] + ">");
+    // Google Places REQUIRES Lat & Long coords to place marker at XYZ.
+    position: latLng,
+    map: map,
+    animation: google.maps.Animation.DROP, // CHANGE: no drop just show.
+    name: name,
+    clickable: true
+  };
+
+  // Setting up the marker object to mark the location on the map canvas.
+  var marker = new google.maps.Marker(markerOptions);
+  var content;
+  if (this.place)
+  {
+    content = this.name + /*'<br/>' + placeResult.vicinity + */'<br/>';
+    windowInfoCreate(marker, latLng, content);
   }
-}
-
-/* ---------- a) initLoad ---------- */
-function initLoad()
-{
-  $('.input_form').on('change', function()
+  else
   {
-    refreshList();
+    content = 'You are here: '+ latLng.lat() + ', ' + latLng.lng();
+    windowInfoCreate(marker, latLng, content);
+  }
+};
 
-    url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=&types='+''items''+'(cities)&language=pt_BR&key=AIzaSyATonHiYZ8w_5Ktnp_YColG3AlX6XPv4vs';
-    $.getJSON()
-  });
-
-
-
-    $('.input_form').submit(function(event)
-    {
-        event.preventDefault();
-        // Take in the city or zipcode, store as userInput.
-        userInput = input.val();
-        // At this point userInput is a string (no matter if integer input).
-        validateInput(); // call function.
-
-        map = new google.maps.Map(document.getElementById('map'));
-    });
-}
-
-/* ---------- b) googleApiCall ---------- */
-
-var x = document.getElementById("map");
-
-function getLocation()
+BreweryMarkerResult.prototype.addPlaceDetails = function()
 {
-    if (navigator.geolocation)
-    {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else
-    {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
+  var parameters =
+  {
+    placeId: this.placeid,
+  };
 
-function showPosition(position)
-{
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
-
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            },
-            zoom: 8
-        });
-}
+  // Accessing PlacesService Library through the Constructor PlacesService
+  // by creating new instance of object called serviceDetails.
+  var serviceDetails = new google.maps.places.PlacesService(map);
+  // Using prototype nearbySearch from Constructor PlacesService.
+  serviceDetails.getDetails(parameters, callbackDetails);
+};
 
 
-function initMap()
-{
-  getLocation();
-}
+myMarkerObject = new BreweryMarkerResult(param1, param2);
+// Each MarkerObject created needs to consist of:
+    // a Marker that is appended to the map.
+    // a Data Set that will be called up & appended to the results-container
+    // upon click event to corresponding Marker.
+    // Marker should have an 'id' that ties it to it's data set.
+    //
