@@ -27,7 +27,7 @@ body
 {
   height: 100%;
 }
-.input-container
+.search-row
 {
   text-align: center;
 }
@@ -39,7 +39,7 @@ body
   text-align: center;
   display: table;
 }
-.map-container
+.map-canvas
 {
   width: 400px;
   height: 400px;
