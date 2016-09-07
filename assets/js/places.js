@@ -1,101 +1,45 @@
 // ########################################
 /*
 *	Table of Contents
-*	1)	Initialization of Variables
-*     a)  Global
-*	2)	Geolocation Code
-*     a) getMyLocation( )
-*     b) displayLocation( )
-*	3)	The Map
-*     a) showMap( )
-*	4)	Google Places Library Calls
-*     a) addNearbyPlaces( )
-*     b) callback( )
-* 5)  Markers
-*     a) apiMarkerCreate
-* 5)  Places Details
+*	1)	Google Places Library Calls
+*     a)  addNearbyPlaces( )
+*     b)  callbackResults( )
+*	2)	Markers
+*     a) apiMarkerCreate( )
+*	3)	Place Details
 *     a) addPlaceDetails( )
 *     b) callbackDetails( )
-* 6)  Event Handlers & Info Box
+*	4)	Event Handlers & Info Box
 *     a) windowInfoCreate( )
 */
+// ########################################
 
-// ####################################################
-/* ---------- Initialization of Variables ---------- */
-// ####################################################
+/*
+    This script is where the code will access the Google Places Library. Using
+    the location data a 'keyword' search on 'breweries' is performed. A new
+    instance of the PlacesService Constructor is created with the map as a
+    parameter because our results will be appending to the map. The nearbySearch
+    method is then applied to the new object requesting it search for 'breweries'
+    on the map in the defined radius. The status of every result is checked to be
+    'OK'. The results are further filtered by searching for the strings 'Brewery'
+    or 'Brewing'. Any result that makes the cut then has a marker created and
+    details gathered. The details are appended via .clone() to the
+    results-container. Animation & event listers are used to make the the Markers
+    clickable & cause the page to scroll to the details region and back to the map.
 
-var resultsScreen = $('.results-row');
-var map;
+    NOTE: The .includes() method from the toString() Constructor is not supported
+    in IE+9 & Opera at this time (06September2016) via MDN:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
 
-// #########################################
-/* ---------- Geolocation Code ---------- */
-// #########################################
 
-/* ---------- getMyLocation ---------- */
-
-// This function checks that geolocation is available in the user's browser.
-function getMyLocation()
-{
-  if(navigator.geolocation)
-  {
-    navigator.geolocation.getCurrentPosition(displayLocation);
-  }
-  else
-  {
-    alert('Sorry, geolocation is not supported in your browser.');
-  }
-}
-
-/* ---------- displayLocation ---------- */
-
-// This function actually invokes the geolocation feature.
-function displayLocation(position)
-{
-  // The Lat & Long values are obtained via the HTML 5 API.
-  var latitude = position.coords.latitude;
-  var longitude = position.coords.longitude;
-
-  // Creates a new object for using Lat & Long values with Google Map.
-  var latLng = new google.maps.LatLng(latitude, longitude);
-
-  // Calls function.
-  showMap(latLng);
-  // Calls function.
-  addNearbyPlaces(latLng);
-  // Calls function.
-  apiMarkerCreate(latLng);
-}
-
-// ################################
-/* ---------- The Map ---------- */
-// ################################
-
-/* ---------- showMap ---------- */
-
-// Renders the map to DOM.
-function showMap(latLng)
-{
-  // Setting up availble options for map.
-  var mapOptions =
-  {
-    center: latLng,
-    zoom: 10,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    draggable: true,
-    scrollwheel: false,
-    disableDefaultUI: true,
-  };
-
-  // Creating the Map instance & assigning the HTML div element to render it in.
-  map = new google.maps.Map(document.getElementById('map'), mapOptions);
-}
+*/
 
 
 // ####################################################
 /* ---------- Google Places Library Calls ---------- */
 // ####################################################
 
-/* ---------- addNearbyPlaces ---------- */
+/* ---------- a) addNearbyPlaces ---------- */
 
 function addNearbyPlaces(latLng)
 {
@@ -115,7 +59,7 @@ function addNearbyPlaces(latLng)
   nearByService.nearbySearch(request, callbackResults);
 }
 
-/* ---------- callback ---------- */
+/* ---------- b) callbackResults ---------- */
 
 // This function scans the Google Places Library for 'breweries' checking first
 // that the status of the location is 'OK'
@@ -129,7 +73,6 @@ function callbackResults(results, status)
       var place = results[i];
       var placeid = place.place_id;
       var name = place.name;
-      console.log(name + ' ' + placeid);
 
       // TEMPORARY FIX: .includes( ) is not supported in IE (MDN).
       // Also is not supported on mobile browsers: IE & Android.
@@ -151,7 +94,7 @@ function callbackResults(results, status)
 /* ---------- Markers ---------- */
 // ################################
 
-/* ---------- apiMarkerCreate ---------- */
+/* ---------- a) apiMarkerCreate ---------- */
 
 function apiMarkerCreate(latLng, placeResult)
 {
@@ -182,7 +125,7 @@ function apiMarkerCreate(latLng, placeResult)
 /* ---------- Places Details ---------- */
 // #######################################
 
-/* ---------- addPlaceDetails ---------- */
+/* ---------- a) addPlaceDetails ---------- */
 
 // This function will get the JSON for the results of the search.
 function addPlaceDetails(brewery_id)
@@ -199,6 +142,10 @@ function addPlaceDetails(brewery_id)
   serviceDetails.getDetails(parameters, callbackDetails);
 }
 
+/* ---------- b) callbackDetails ---------- */
+
+// This function will get specific data from JSON and append via .clone( ) to
+// the HTML specified location.
 function callbackDetails(brewery_data)
 {
   resultsScreen.show();
@@ -249,7 +196,7 @@ function callbackDetails(brewery_data)
 /* ---------- Event Handlers & Info Box ---------- */
 // ##################################################
 
-/* ---------- windowInfoCreate ---------- */
+/* ---------- a) windowInfoCreate ---------- */
 
 function windowInfoCreate(marker, latLng, content)
 {
@@ -266,7 +213,6 @@ function windowInfoCreate(marker, latLng, content)
       infoWindow.open(map, this);
   });
 
-  // assuming you also want to hide the infowindow when user mouses-out
   marker.addListener('mouseout', function()
   {
       infoWindow.close();
@@ -276,5 +222,13 @@ function windowInfoCreate(marker, latLng, content)
   {
       $('#linkcollapse' + marker.placeResult.id).click();
       $('html, body').animate({scrollTop: $('#linkcollapse' + marker.placeResult.id).offset().top}, 1000);
+  });
+
+  resultsScreen.on('click', '.back2top', function(event)
+  {
+    event.stopPropagation(); // check to see if this is needed. (look up what it does)
+    event.preventDefault();
+    $('html, body').animate({scrollTop: 0}, 1000);
+    $(this).parent().parent().parent().find('.panel-title a').click();
   });
 }
