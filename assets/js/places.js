@@ -84,15 +84,16 @@ function callbackResults(results, status)
         // Creates new instance of Google's LatLng Constructor for each brewery.
         var myLatLng = new google.maps.LatLng(markerLat, markerLng);
         // Calls function.
-        apiMarkerCreate(place.geometry.location, place);
+        apiMarkerCreate(myLatLng, place);
         // Calls function.
         addPlaceDetails(placeid);
         // Extends the bounds of the map via lat/lng coords of each brewery.
         bounds.extend(myLatLng);
+        console.log('Created: ' + name);
       }
+      // Auto-zoom for Map based on bounds set by coords of breweries.
+      map.fitBounds(bounds);
     }
-    // Auto-zoom for Map based on bounds set by coords of breweries.
-    map.fitBounds(bounds);
     return true;
   }
   else
@@ -107,13 +108,13 @@ function callbackResults(results, status)
 
 /* ---------- a) apiMarkerCreate ---------- */
 
-function apiMarkerCreate(latLng, placeResult)
+function apiMarkerCreate(myLatLng, placeResult)
 {
   if(!placeResult) return;
   var markerOptions =
   {
     // Google Places REQUIRES Lat & Long coords to place marker at XYZ.
-    position: latLng,
+    position: myLatLng,
     map: map,
     animation: google.maps.Animation.DROP, // CHANGE: no drop just show.
     name: name,
@@ -128,7 +129,7 @@ function apiMarkerCreate(latLng, placeResult)
   {
     // Displays name of brewery when marker is moused over.
     content = placeResult.name;
-    windowInfoCreate(marker, latLng, content);
+    windowInfoCreate(marker, myLatLng, content);
   }
 }
 

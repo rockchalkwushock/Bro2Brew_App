@@ -1,9 +1,9 @@
 // ########################################
 /*
-*	Table of Contents
-*	1)	initAutocomplete( )
-*	2)	captureLocation( )
-*/
+ *	Table of Contents
+ *	1)	initAutocomplete( )
+ *	2)	captureLocation( )
+ */
 // ########################################
 
 /*
@@ -19,24 +19,25 @@
 
 /* ---------- 1) initAutocomplete ---------- */
 
-function initAutocomplete(){
+function initAutocomplete() {
 
-  var input = document.getElementById('searchTextField'); // HTML input type=text where Autocomplete will render.
-  var options = {
-    types: ['geocode'], // instructs the Places service to return only geocoding results, rather than business results.
-  };
+    var input = document.getElementById('searchTextField'); // HTML input type=text where Autocomplete will render.
+    var options = {
+        types: ['geocode'], // instructs the Places service to return only geocoding results, rather than business results.
+    };
 
-  autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete = new google.maps.places.Autocomplete(input, options);
 
-  autocomplete.addListener('place_changed', captureLocation);
+    autocomplete.addListener('place_changed', captureLocation);
 }
 
 /* ---------- 2) captureLocation ---------- */
 
-function captureLocation(){
-  // Store the 'autocomplete' object.
-  places = autocomplete.getPlace();
-  console.log(places);
-  // Calls function.
-  geocode(places);
+function captureLocation() {
+    // Store the 'autocomplete' object.
+    places = autocomplete.getPlace();
+    // Store the 'location' object that containes lat & long functions.
+    coords = places.geometry.location;
+    // Calls function.
+    geocode(coords);
 }

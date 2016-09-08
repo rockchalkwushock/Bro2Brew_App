@@ -1,12 +1,12 @@
 // ########################################
 /*
-*	Table of Contents
-*	1)	Initialization of Variables
-*     a)  Global
-* 2)  Child Functions
-*     a) initLoad( )
-* 3)  App.js Execution
-*/
+ *	Table of Contents
+ *	1)	Initialization of Variables
+ *     a)  Global
+ * 2)  Child Functions
+ *     a) initLoad( )
+ * 3)  App.js Execution
+ */
 // ########################################
 
 /*
@@ -26,23 +26,21 @@ var mainScreen = $('#search-row');
 var mapScreen = $('#map-row');
 var resultsScreen = $('#results-row');
 var inputField = $('#searchTextField');
-var places;
-var bounds;
+var coords; // will hold location object from Location user is at.
+var bounds; // will represent the instance of Google's LatLngBounds Constructor.
 
 // ########################################
 /* ---------- Child Functions ---------- */
 // ########################################
 
 /* ---------- a) initLoad ---------- */
-function initLoad()
-{
-  mainScreen.show();  // Only input-container is visible.
-  mapScreen.hide();   // map-container hidden.
-  resultsScreen.hide(); // results-container hidden.
+function initLoad() {
+    mainScreen.show(); // Only input-container is visible.
+    mapScreen.hide(); // map-container hidden.
+    resultsScreen.hide(); // results-container hidden.
 
-
-  // When User clicks on text field initAutocomplete( ) will run.
-  mainScreen.focusin(initAutocomplete);
+    // When User clicks on text field initAutocomplete( ) will run.
+    mainScreen.focusin(initAutocomplete);
 }
 
 // ####################################################

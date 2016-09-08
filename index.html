@@ -20,13 +20,12 @@
 
 <body>
     <div class="wrapper">
-        <div class="header">
-            <h1>Bro2Brew</h1></div>
+        <div class="header text customfont">
+            Bro2Brew
+        </div>
         <div class="row">
-            <div id="search-row" class="col-md-12 search-row">
-                <div class="col-xs-12">
-                    <input id="searchTextField" type="text" placeholder="Enter a location.">
-                </div>
+            <div id="search-row" class="col-md-12 col-xs-12 search-row">
+                <input id="searchTextField" type="text" placeholder="Enter a location.">
             </div>
             <div id="map-row" class=" map-row col-md-6 col-xs-12">
                 <div id="map-canvas" class="map-canvas">
@@ -55,6 +54,14 @@
                 </div>
             </div>
         </div>
+        <footer>
+            <ul class="contact">
+                <li>Bro2Brew, LLC</li>
+                <li>123 Hops Lane, Brewsenhiemer, Wisconsin 54401</li>
+                <li>1-888-342-BREW</li>
+                <li>helpdesk@bro2brew.org</li>
+            </ul>
+        </footer>
     </div>
 
     <!-- Scripts -->
@@ -67,6 +74,7 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM&libraries=places&callback=geolocate"></script>
     <!-- Local Scripts -->
     <script type="text/javascript" src="assets/js/geolocation.js"></script>
+    <script type="text/javascript" src="assets/js/ip_geolocation.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/autocomplete.js"></script>
     <script type="text/javascript" src="assets/js/geocoding.js"></script>

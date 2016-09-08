@@ -1,8 +1,8 @@
 // ########################################
 /*
-*	Table of Contents
-*	1)	geocode( )
-*/
+ *	Table of Contents
+ *	1)	geocode( )
+ */
 // ########################################
 
 /*
@@ -16,18 +16,16 @@
 
 /* ---------- 1) geocode ---------- */
 
-function geocode(places){
-  
-  var latitude = places.geometry.location.lat();
+function geocode(coords) {
 
-  var longitude = places.geometry.location.lng();
-  // Creates a new object for using Lat & Long values with Google Map.
-  var latLng = new google.maps.LatLng(latitude, longitude);
+    var latitude = coords.lat();
 
-  // Calls function.
-  showMap(latLng);
-  // Calls function.
-  addNearbyPlaces(latLng);
-  // Calls function.
-  apiMarkerCreate(latLng);
+    var longitude = coords.lng();
+    // Creates a new object for using Lat & Long values with Google Map.
+    var latLng = new google.maps.LatLng(latitude, longitude);
+
+    // Calls function.
+    showMap(latLng);
+    // Calls function.
+    addNearbyPlaces(latLng);
 }

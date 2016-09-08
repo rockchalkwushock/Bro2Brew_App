@@ -1,63 +1,105 @@
 /* Baseline CSS*/
 
-html
-{
-  margin: 0 auto;
-  border: 0;
-  padding: 0;
-  height: 100%;
+html {
+    margin: 0 auto;
+    border: 0;
+    padding: 0;
+    height: 100%;
 }
-body
-{
-  height: 100%;
-}
-.wrapper
-{
-  margin: auto;
-  height: 100%;
-}
-.header
-{
-  font-size: 4em;
-  /*margin-bottom: 1em;*/
-  text-align: center;
-}
-.container
-{
-  height: 100%;
-}
-.search-row
-{
-  text-align: center;
-}
-.map-row
-{
-  margin: 0 auto;
-  height: 50%;
-  /*width: 100%;*/
 
-  text-align: center;
-  display: table;
+body {
+    height: 100%;
 }
-#map-canvas
-{
+
+.wrapper {
+    margin: auto;
+    height: 100%;
+}
+
+.header {
+    font-size: 4em;
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: .25em;
+    background-color: navy;
+    height: 15%;
+}
+
+.container {
+    height: 100%;
+}
+
+.search-row {
+    text-align: center;
+    background-color: navy;
+}
+
+input {
+    width: 60%;
+    height: 30px;
+    border-radius: .75em;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.map-row {
+    margin: 0 auto;
+    height: 50%;
+    /*width: 100%;*/
+    text-align: center;
+    display: table;
+}
+
+#map-canvas {
+    width: 100%;
+    height: 400px;
+}
+
+.results-row {
+    margin: 0 auto;
+    height: 50%;
+    display: table;
+    overflow-y: scroll;
+}
+
+footer {
   width: 100%;
-  height: 400px;
+  padding: 1em;
+  background-color: navy;
+  background-position: 0% 0%;
+  color: white;
+  font-size: .85em;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 85px;
 }
-.results-row
-{
-  margin: 0 auto;
-  height: 50%;
-  /*width: 100%;*/
-  display: table;
+
+.template {
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
 }
-.template
-{
-  margin: 0 auto;
-  width: 400px;
-  height: 400px;
+
+.hidden {
+    display: none;
 }
-.hidden
-{
-  display: none;
+
+.contact{
+  list-style: none;
+  font-size: 1em;
 }
+
+/*@font-face {
+    font-family: "My Custom Font";
+    src: url("../assets/fonts/Freakshow.ttf") format("truetype");
+}
+
+.customfont {
+    font-family: "My Custom Font", Verdana, Tahoma;
+}
+
+.text {
+
+}*/

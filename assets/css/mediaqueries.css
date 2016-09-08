@@ -22,4 +22,7 @@ and (min-width : 1224px) {
   {
     height: 100%;
   }
+  input{
+    width: 25%;
+  }
 }
