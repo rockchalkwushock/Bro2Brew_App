@@ -30,4 +30,5 @@ function showMap(latLng)
   mapScreen.show();
   // Creating the Map instance & assigning the HTML div element to render it in.
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  inputField.val('');
 }

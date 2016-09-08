@@ -1,0 +1,25 @@
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px) {
+/* Styles */
+}
+
+
+/* Desktops and laptops ----------- */
+@media only screen
+and (min-width : 1224px) {
+
+  .map-row
+  {
+    height: 100%;
+  }
+  #map-canvas
+  {
+    height: 800px;
+  }
+  .results-row
+  {
+    height: 100%;
+  }
+}

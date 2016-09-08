@@ -65,23 +65,34 @@ function addNearbyPlaces(latLng)
 // that the status of the location is 'OK'
 function callbackResults(results, status)
 {
+  // Creating a new instance of Google's LatLngBounds Constructor.
+  bounds = new google.maps.LatLngBounds();
   if (status == google.maps.places.PlacesServiceStatus.OK)
   {
     for (var i = 0; i < results.length; i++)
     {
-      // var breweryMarker = new BreweryMarkerResult(results[i]);
-      var place = results[i];
-      var placeid = place.place_id;
-      var name = place.name;
+      var place = results[i]; // store brewery result object.
+      var placeid = place.place_id; // store Google place_id.
+      var name = place.name;  // store name of brewery.
+      var markerLat = place.geometry.location.lat();  // store latitude of brewery.
+      var markerLng = place.geometry.location.lng();  // store longitude of brewery.
 
       // TEMPORARY FIX: .includes( ) is not supported in IE (MDN).
       // Also is not supported on mobile browsers: IE & Android.
       if (name.includes("Brewery") || name.includes("Brewing"))
       {
+        // Creates new instance of Google's LatLng Constructor for each brewery.
+        var myLatLng = new google.maps.LatLng(markerLat, markerLng);
+        // Calls function.
         apiMarkerCreate(place.geometry.location, place);
+        // Calls function.
         addPlaceDetails(placeid);
+        // Extends the bounds of the map via lat/lng coords of each brewery.
+        bounds.extend(myLatLng);
       }
     }
+    // Auto-zoom for Map based on bounds set by coords of breweries.
+    map.fitBounds(bounds);
     return true;
   }
   else

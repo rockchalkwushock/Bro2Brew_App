@@ -15,26 +15,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Local CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/mediaqueries.css">
 </head>
 
 <body>
     <div class="wrapper">
         <div class="header">
             <h1>Bro2Brew</h1></div>
-        <div class="container">
-            <div id="search-row" class="row search-row">
+        <div class="row">
+            <div id="search-row" class="col-md-12 search-row">
                 <div class="col-xs-12">
-                    <label for="">Search</label>
                     <input id="searchTextField" type="text" placeholder="Enter a location.">
                 </div>
             </div>
-            <div id="map-row" class="row map-row">
-                <div id="map-canvas" class="col-xs-12 map-canvas">
+            <div id="map-row" class=" map-row col-md-6 col-xs-12">
+                <div id="map-canvas" class="map-canvas">
 
                 </div>
             </div>
-            <div id="results-row" class="row results-row">
-                <div class="panel-group results-container col-xs-12" id="collapsible_panel"></div>
+            <div id="results-row" class=" results-row col-md-6 col-xs-12">
+                <div class="panel-group results-container" id="collapsible_panel"></div>
                 <div class="template hidden">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -64,14 +64,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- API Sources -->
     <!-- Google Maps JavaScript API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM&libraries=places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBah8zsinOa_LzdPtXJdj2PPvAt8ImrKGM&libraries=places&callback=geolocate"></script>
     <!-- Local Scripts -->
+    <script type="text/javascript" src="assets/js/geolocation.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>
     <script type="text/javascript" src="assets/js/autocomplete.js"></script>
     <script type="text/javascript" src="assets/js/geocoding.js"></script>
     <script type="text/javascript" src="assets/js/map.js"></script>
     <script type="text/javascript" src="assets/js/places.js"></script>
-    <!-- <script type="text/javascript" src="assets/js/geolocation.js"></script> -->
 </body>
 
 </html>

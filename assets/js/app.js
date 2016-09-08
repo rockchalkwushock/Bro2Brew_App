@@ -27,7 +27,7 @@ var mapScreen = $('#map-row');
 var resultsScreen = $('#results-row');
 var inputField = $('#searchTextField');
 var places;
-
+var bounds;
 
 // ########################################
 /* ---------- Child Functions ---------- */
@@ -39,6 +39,7 @@ function initLoad()
   mainScreen.show();  // Only input-container is visible.
   mapScreen.hide();   // map-container hidden.
   resultsScreen.hide(); // results-container hidden.
+
 
   // When User clicks on text field initAutocomplete( ) will run.
   mainScreen.focusin(initAutocomplete);

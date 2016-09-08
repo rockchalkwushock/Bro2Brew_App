@@ -20,6 +20,7 @@
 /* ---------- 1) initAutocomplete ---------- */
 
 function initAutocomplete(){
+
   var input = document.getElementById('searchTextField'); // HTML input type=text where Autocomplete will render.
   var options = {
     types: ['geocode'], // instructs the Places service to return only geocoding results, rather than business results.
@@ -28,9 +29,6 @@ function initAutocomplete(){
   autocomplete = new google.maps.places.Autocomplete(input, options);
 
   autocomplete.addListener('place_changed', captureLocation);
-
-  // ##### Cannot get input field to clear after autocomplete #####
-  inputField.empty();
 }
 
 /* ---------- 2) captureLocation ---------- */
