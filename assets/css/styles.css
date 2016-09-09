@@ -1,11 +1,15 @@
 /* Baseline CSS*/
 
-html, body, .wrapper {
+html, body {
     margin: 0 auto;
     border: 0;
     padding: 0;
     height: 100%;
     background-color: navy;
+}
+
+.wrapper {
+    position: relative;
 }
 
 .header {
@@ -18,9 +22,9 @@ html, body, .wrapper {
     height: 10%;
 }
 
-.row{
-  height: 80%;
-  background-color: navy;
+.row {
+    height: 80%;
+    background-color: navy;
 }
 
 .search-row {
@@ -42,7 +46,7 @@ input {
     display: table;
 }
 
-#map-canvas {
+.map-canvas {
     width: 100%;
     height: 400px;
 }
@@ -55,16 +59,16 @@ input {
 }
 
 .footer {
-  width: 100%;
-  padding: 1em;
-  background-color: navy;
-  background-position: 0% 0%;
-  color: white;
-  font-size: .85em;
-  position: relative;
-  bottom: 0;
-  right: 0;
-  height: 10%;
+    width: 100%;
+    padding: 1em;
+    background-color: navy;
+    background-position: 0% 0%;
+    color: white;
+    font-size: .85em;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    height: 10%;
 }
 
 .template {
@@ -77,17 +81,19 @@ input {
     display: none;
 }
 
-.contact{
-  list-style: none;
-  font-size: 1em;
-  margin-left: -3.5em;
-  margin-bottom: .25em;
+.contact {
+    list-style: none;
+    font-size: 1em;
+    margin-left: -3.5em;
+    margin-bottom: .25em;
+    /*height: 100%;
+  position: relative;*/
 }
 
-.panel-group .panel+.panel
-{
-  margin-top: 0;
+.panel-group .panel+.panel {
+    margin-top: 0;
 }
+
 
 /*@font-face {
     font-family: "My Custom Font";
