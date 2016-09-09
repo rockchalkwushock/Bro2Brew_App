@@ -44,6 +44,11 @@ function initLoad() {
     // When User clicks on text field initAutocomplete( ) will run.
     mainScreen.focusin(initAutocomplete);
 }
+/* ---------- b) reset ---------- */
+function reset() {
+    $('#results-row #collapsible_panel').empty(); // clear all resutls from div.
+    resultsScreen.hide(); // results-container hidden.
+}
 
 // ####################################################
 /* ---------- App.js Execution ---------- */

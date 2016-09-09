@@ -12,7 +12,7 @@
         height: 100%;
     }
     #map-canvas {
-        height: 800px;
+        height: 700px;
     }
     .results-row {
         height: 100%;
@@ -20,7 +20,7 @@
     input {
         width: 25%;
     }
-    footer {
+    .footer {
       position: fixed;
     }
 }

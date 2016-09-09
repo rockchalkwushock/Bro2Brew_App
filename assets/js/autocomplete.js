@@ -20,7 +20,7 @@
 /* ---------- 1) initAutocomplete ---------- */
 
 function initAutocomplete() {
-
+    reset();
     var input = document.getElementById('searchTextField'); // HTML input type=text where Autocomplete will render.
     var options = {
         types: ['geocode'], // instructs the Places service to return only geocoding results, rather than business results.

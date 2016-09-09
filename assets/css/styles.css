@@ -1,34 +1,9 @@
 /* Baseline CSS*/
 
-html {
+html, body, .wrapper {
     margin: 0 auto;
     border: 0;
     padding: 0;
-    height: 100%;
-    background-color: navy;
-}
-
-body {
-    height: 100%;
-    background-color: navy;
-}
-
-.overlay {
-        background: #ffffff;
-        color: #666666;
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        z-index: 5000;
-        top: 0;
-        left: 0;
-        float: left;
-        text-align: center;
-        padding-top: 25%;
-    }
-
-.wrapper {
-    margin: auto;
     height: 100%;
     background-color: navy;
 }
@@ -40,12 +15,12 @@ body {
     width: 100%;
     padding: .25em;
     background-color: navy;
-    height: 15%;
+    height: 10%;
 }
 
-.container {
-    height: 100%;
-    width: 100%;
+.row{
+  height: 80%;
+  background-color: navy;
 }
 
 .search-row {
@@ -76,20 +51,20 @@ input {
     margin: 0 auto;
     height: 50%;
     display: table;
-    overflow-y: scroll;
+    background-color: navy;
 }
 
-footer {
+.footer {
   width: 100%;
   padding: 1em;
   background-color: navy;
   background-position: 0% 0%;
   color: white;
   font-size: .85em;
-  position: relative;;
+  position: relative;
   bottom: 0;
   right: 0;
-  height: 85px;
+  height: 10%;
 }
 
 .template {
@@ -105,7 +80,8 @@ footer {
 .contact{
   list-style: none;
   font-size: 1em;
-  margin-left: -4em;
+  margin-left: -3.5em;
+  margin-bottom: .25em;
 }
 
 .panel-group .panel+.panel
