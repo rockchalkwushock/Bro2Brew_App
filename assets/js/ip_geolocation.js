@@ -15,10 +15,6 @@
    script & code iterations.
 */
 
-
-
-
-
 /* ---------- 1) userIP ---------- */
 
 function userIP()

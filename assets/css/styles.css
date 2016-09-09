@@ -5,15 +5,32 @@ html {
     border: 0;
     padding: 0;
     height: 100%;
+    background-color: navy;
 }
 
 body {
     height: 100%;
+    background-color: navy;
 }
+
+.overlay {
+        background: #ffffff;
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 25%;
+    }
 
 .wrapper {
     margin: auto;
     height: 100%;
+    background-color: navy;
 }
 
 .header {
@@ -28,6 +45,7 @@ body {
 
 .container {
     height: 100%;
+    width: 100%;
 }
 
 .search-row {
@@ -40,13 +58,11 @@ input {
     height: 30px;
     border-radius: .75em;
     text-align: center;
-    margin-bottom: 2em;
+    margin: 1em 0em 1em 0em;
 }
 
 .map-row {
     margin: 0 auto;
-    height: 50%;
-    /*width: 100%;*/
     text-align: center;
     display: table;
 }
@@ -70,7 +86,7 @@ footer {
   background-position: 0% 0%;
   color: white;
   font-size: .85em;
-  position: fixed;
+  position: relative;;
   bottom: 0;
   right: 0;
   height: 85px;
@@ -89,6 +105,12 @@ footer {
 .contact{
   list-style: none;
   font-size: 1em;
+  margin-left: -4em;
+}
+
+.panel-group .panel+.panel
+{
+  margin-top: 0;
 }
 
 /*@font-face {
