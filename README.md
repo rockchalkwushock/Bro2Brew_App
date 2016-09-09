@@ -1,5 +1,5 @@
 # Bro2Brew
-Thinkful Capstone #1 Project: API Hack for finding local breweries.
+Thinkful (<https://www.thinkful.com/>) Capstone #1 Project: API Hack for finding local breweries.
 
 ## Bro2Brew - Find local breweries in your area!
 
@@ -10,6 +10,11 @@ Simplistic design and integration along with a sleek UX leaves it in a category 
 
 ### Use Case
 Why is this app useful? Well if you love good craft beers like I do then you know the best place to find them are micro-breweries. This app will lead you to all those local "diamonds in the rough" and their amazing brews!
+
+### Future Features
+  * Ratings of Breweries.
+  * Ratings for beers at breweries.
+  * User Beer & Brewery Rating Service.
 
 ### Technical
   * This app is built on the front-end using HTML5, CSS3, Javascript, jQuery, & Bootstrap.
