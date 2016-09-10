@@ -57,9 +57,10 @@ html, body {
 .results-row {
   height: 49%;
   overflow: auto;
-  background-color: #98B4FF;
+  background-color: #4E5B7F;
   padding-left: 0;
   padding-right: 0;
+
 }
 
 /* Inside Searh-Row Div */
@@ -85,6 +86,9 @@ input {
 /* Inside Results-Row Div */
 .panel-group .panel+.panel {
   margin-top: 0;
+}
+.panel-group {
+  margin-bottom: 0;
 }
 
 /* Inside Footer */

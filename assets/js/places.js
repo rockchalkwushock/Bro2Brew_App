@@ -166,41 +166,48 @@ function callbackDetails(brewery_data)
   span.find('#result-address').html(brewery_data.vicinity);
   span.find('#result-phone').html(brewery_data.formatted_phone_number);
   span.find('#result-url').html(brewery_data.website);
-  span.find('a').attr('href', '#collapse' + brewery_data.id);
-  span.find('a').attr('id', 'linkcollapse' + brewery_data.id);
+  span.find('.url').attr('href', brewery_data.website);
+  span.find('.panel_heading').attr('href', '#collapse' + brewery_data.id);
+  span.find('.panel_heading').attr('id', 'linkcollapse' + brewery_data.id);
   span.find('.panel-collapse').attr('id', 'collapse' + brewery_data.id);
   // if the brewery is open say 'Open Now' with day & hours.
-  if (brewery_data.opening_hours.open_now)
-  {
-    switch (new Date().getDay())
+  if (!brewery_data.opening_hours) {
+    span.find('#result-hours').html('Hours not available.');
+  }
+  else {
+    if (brewery_data.opening_hours.open_now)
     {
-      case 0: // Sunday
-          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[6]);
-          break;
-      case 1: // Monday
-          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[0]);
-          break;
-      case 2: // Tuesday
-          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[1]);
-          break;
-      case 3: // Wednesday
-          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[2]);
-          break;
-      case 4: // Thursday
-          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[3]);
-          break;
-      case 5: // Friday
-          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[4]);
-          break;
-      case 6: // Saturday
-          day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[5]);
+      switch (new Date().getDay())
+      {
+        case 0: // Sunday
+            day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[6]);
+            break;
+        case 1: // Monday
+            day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[0]);
+            break;
+        case 2: // Tuesday
+            day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[1]);
+            break;
+        case 3: // Wednesday
+            day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[2]);
+            break;
+        case 4: // Thursday
+            day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[3]);
+            break;
+        case 5: // Friday
+            day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[4]);
+            break;
+        case 6: // Saturday
+            day = span.find('#result-hours').html('Open Now: ' + brewery_data.opening_hours.weekday_text[5]);
+      }
+    }
+    // else say closed now
+    else
+    {
+      span.find('#result-hours').html('Closed Now');
     }
   }
-  // else say closed now
-  else
-  {
-    span.find('#result-hours').html('Closed Now');
-  }
+
   $('#results-row #collapsible_panel').append(span);
 }
 
@@ -232,15 +239,17 @@ function windowInfoCreate(marker, latLng, content)
 
   marker.addListener('click', function()
   {
+      var height_data = $('.header').height() + $('.search-row').height() + $('.map-row').height();
       $('#linkcollapse' + marker.placeResult.id).click();
-      $('html, body').animate({scrollTop: $('#linkcollapse' + marker.placeResult.id).offset().top}, 1000);
+      $('#results-row').animate({scrollTop: $('#linkcollapse' + marker.placeResult.id).offset().top-height_data}, 500);
+      console.log($('#linkcollapse' + marker.placeResult.id).offset().top);
   });
 
   resultsScreen.on('click', '.back2top', function(event)
   {
     event.stopPropagation(); // check to see if this is needed. (look up what it does)
     event.preventDefault();
-    $('html, body').animate({scrollTop: 0}, 1000);
+    $('#results-row').animate({scrollTop: 0}, 500);
     $(this).parent().parent().parent().find('.panel-title a').click();
   });
 }
