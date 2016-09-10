@@ -202,7 +202,6 @@ function callbackDetails(brewery_data)
     span.find('#result-hours').html('Closed Now');
   }
   $('#results-row #collapsible_panel').append(span);
-  footer.show();
 }
 
 // ##################################################

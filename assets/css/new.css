@@ -1,0 +1,104 @@
+/*Base Styling Components
+  - built as Mobile first design.
+  - media queries present in other styling sheet.
+*/
+
+/* Apply to all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Initial DOM Styling */
+html, body {
+  height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Webpage Styling */
+.wrapper {
+  height: 100%;
+  overflow-x: hidden;
+}
+.header {
+  height: 10%;
+  text-align: center;
+  font-size: 4em;
+  color: white;
+  background-color: #4E5B7F;
+}
+.content {
+  height: 78%;
+  position: relative;
+  background-color: #4E5B7F;
+}
+.footer {
+  height: 12%;
+  padding: 1em;
+  background-color: #4E5B7F;
+  /*background-position: 0 0;*/
+  color: white;
+  font-size: 0.9em;
+  font-style: italic;
+  font-weight: bold;
+}
+/* Inside Content Div */
+.search-row {
+  height: 8%;
+  text-align: center;
+  background-color: #98B4FF;
+}
+.map-row {
+  height: 43%;
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+}
+.results-row {
+  height: 49%;
+  overflow: auto;
+  background-color: #98B4FF;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Inside Searh-Row Div */
+input {
+  width: 60%;
+  height: 1.875em;
+  border-radius: .75em;
+  text-align: center;
+  margin-top: .5em;
+  color: black;
+  font-weight: bold;
+}
+
+/* Inside Map-Row Div */
+.map-canvas {
+  height: 0;
+    overflow: hidden;
+    padding-bottom: 50%;
+    padding-top: 1.875em;
+    position: relative;
+}
+
+/* Inside Results-Row Div */
+.panel-group .panel+.panel {
+  margin-top: 0;
+}
+
+/* Inside Footer */
+.contact {
+  list-style: none;
+  margin-left: -3em;
+}
+
+/* Template */
+.template {
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
+}
+.hidden {
+  display: none;
+}

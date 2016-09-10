@@ -25,7 +25,6 @@
 var mainScreen = $('#search-row');
 var mapScreen = $('#map-row');
 var resultsScreen = $('#results-row');
-var footer = $('.footer');
 var inputField = $('#searchTextField');
 var coords; // will hold location object from Location user is at.
 var bounds; // will represent the instance of Google's LatLngBounds Constructor.
@@ -39,7 +38,6 @@ function initLoad() {
     mainScreen.show(); // Only input-container is visible.
     mapScreen.hide(); // map-container hidden.
     resultsScreen.hide(); // results-container hidden.
-    footer.hide(); // hide footer.
 
     // When User clicks on text field initAutocomplete( ) will run.
     mainScreen.focusin(initAutocomplete);
