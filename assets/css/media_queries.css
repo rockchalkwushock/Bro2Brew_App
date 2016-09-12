@@ -1,9 +1,9 @@
+/*
+  These Bootstrap Media Queries handle all viewports and orientations.
+*/
+
 /* Handles landscaper orientation on mobile */
 @media(min-width:34em) {
-  html {
-    background-color: red;
-  }
-
     /* Webpage Styling */
     html, body, .wrapper {
         height: 100%;
@@ -11,6 +11,7 @@
     }
     .header {
         height: 10%;
+        min-height: 70px;
     }
     .content {
         height: 90%;
@@ -18,18 +19,29 @@
     .footer {
       display: none;
     }
+
     /* Inside Content Div */
     .search-row {
         height: 10%;
+        padding-top: .1em;
     }
+    .map_results-container {
+      height: 90%;
+      padding: 1em;
+      margin: 0;
+    }
+    /* Inside Map-Results Div*/
     .map-row {
         height: 90%;
         max-width: 50%;
+        padding: 1em;
+        padding-right: 0.5em;
     }
     .results-row {
         height: 90%;
         max-width: 50%;
-        /*padding: 2em 2em 2em 1em;*/
+        padding: 1em;
+        padding-left: 0.5em;
     }
     /* Inside Searh-Row Div */
     input {
@@ -39,17 +51,12 @@
     }
     /* Inside Map-Row Div */
     .map-canvas {
-        padding-bottom: 65%;
-        margin: 1em .5em 1em .5em;
+        padding-bottom: 75%;
     }
 }
 
 /* Tablets (portrait) */
 @media(min-width:48em) {
-    html {
-        background-color: yellow;
-    }
-
     .header {
         padding-top: .25em;
     }
@@ -64,19 +71,28 @@
     /* Inside Content Div */
     .search-row {
         height: 8%;
+        padding-top: .75em;
     }
+    .map_results-container {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    /* Inside Map-Results Div*/
     .map-row {
-        height: 46%;
+        height: 45%;
         max-width: 100%;
+        padding: 0;
     }
     .results-row {
-        height: 46%;
+        height: 45%;
         padding: 0;
         max-width: 100%;
     }
     /* Inside Searh-Row Div */
     input {
-        width: 35%;
+        width: 45%;
+        height: 1.75em;
         font-size: 1.5em;
     }
     /* Inside Map-Row Div */
@@ -88,10 +104,6 @@
 
 /* Tablets (landscape) */
 @media(min-width:62em) {
-    html {
-        background-color: green;
-    }
-
     .header {
         padding-top: .25em;
     }
@@ -106,7 +118,14 @@
     /* Inside Content Div */
     .search-row {
         height: 10%;
+        padding-top: .5em
     }
+    .map_results-container {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    /* Inside Map-Results Div*/
     .map-row {
         height: 90%;
         max-width: 50%;
@@ -122,17 +141,13 @@
     }
     /* Inside Map-Row Div */
     .map-canvas {
-        padding-bottom: 85%;
+        padding-bottom: 95%;
         margin: 2em 1em 2em 2em;
     }
 }
 
 /* Desktop */
 @media(min-width:75em) {
-    html {
-        background-color: black;
-    }
-
     .header {
         padding-top: .25em;
     }
@@ -147,7 +162,14 @@
     /* Inside Content Div */
     .search-row {
         height: 10%;
+        padding-top: .75em;
     }
+    .map_results-container {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    /* Inside Map-Results Div*/
     .map-row {
         height: 90%;
     }
@@ -162,7 +184,7 @@
     }
     /* Inside Map-Row Div */
     .map-canvas {
-        padding-bottom: 75%;
+        padding-bottom: 73%;
         margin: 2em 1em 2em 2em;
     }
 }

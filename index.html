@@ -16,10 +16,7 @@
     <!-- Local CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
     <!-- Media Queries -->
-    <!-- <link rel="stylesheet" type="text/css" media="(min-width: 375px)" href="assets/css/iPhone6_MQ.css">
-    <link rel="stylesheet" type="text/css" media="(min-width: 768px)" href="assets/css/iPad_MQ.css">
-    <link rel="stylesheet" type="text/css" media="(min-width: 1224px)" href="assets/css/desktop_MQ.css"> -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bsMQs.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/media_queries.css">
 </head>
 
 <body>
@@ -40,19 +37,23 @@
                 <input id="searchTextField" type="text" placeholder="Enter a location">
             </div>
 
-            <!-- Map Container -->
-            <div id="map-row" class=" map-row col-md-12 col-xs-12">
+            <!-- Map/Results Container -->
+            <div class="map_results-container">
+                <!-- Map Container -->
+                <div id="map-row" class=" map-row col-md-12 col-xs-12">
 
-                <!-- Google Map -->
-                <div id="map-canvas" class="map-canvas"></div>
+                    <!-- Google Map -->
+                    <div id="map-canvas" class="map-canvas"></div>
+                </div>
+
+                <!-- Results Container -->
+                <div id="results-row" class=" results-row col-md-12 col-xs-12">
+
+                    <!-- Panels -->
+                    <div class="panel-group results-container" id="collapsible_panel"></div>
+                </div>
             </div>
 
-            <!-- Results Container -->
-            <div id="results-row" class=" results-row col-md-12 col-xs-12">
-
-                <!-- Panels -->
-                <div class="panel-group results-container" id="collapsible_panel"></div>
-            </div>
         </div>
 
         <!-- Footer -->
