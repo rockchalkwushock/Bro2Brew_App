@@ -1,7 +1,6 @@
-# Problems to address (Current as of 09 September 2016)
+# Problems to address (Current as of 11 September 2016)
 
 ## CSS
-  * Font for heading???
   * Color Scheme...looks like shit!
   * When DOM loads and user is prompted....overlay...picture in content div????
 
@@ -11,8 +10,6 @@
 
 #### Updates
   * Need to update:
-    - README.md
-    - Go through comments and fix, remove, or add.
 
 
 ## Beer Mug Sliding GIF

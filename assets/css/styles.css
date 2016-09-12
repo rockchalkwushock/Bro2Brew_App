@@ -1,109 +1,119 @@
-/* Baseline CSS*/
+/*
+  Base Styling Components
+  - built as Mobile first design.
+  - built using iPhone 6 Portrait (375 x 667).
+  - media queries present in other styling sheet.
+*/
 
+
+/* Fonts */
+@font-face {
+	font-family: Oktoberfest;
+	src:url("../fonts/oktoberfest.ttf");
+}
+
+/* Apply to all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Initial DOM Styling */
 html, body {
-    margin: 0 auto;
-    border: 0;
-    padding: 0;
-    height: 100%;
-    /*background-color: navy;*/
+  max-width: 100%;
 }
 
-.wrapper {
-    position: relative;
+/* Webpage Styling */
+html, body, .wrapper {
+  height: 100%;
+  overflow: hidden;
 }
-
+.header, .content, .results-row {
+  background-color: #4E5B7F;
+}
+.footer, .search-row {
+  background-color: #98B4FF;
+}
 .header {
-    font-size: 4em;
-    color: #E8EFFF;
-    text-align: center;
-    width: 100%;
-    padding: .25em;
-    background-color: #4E5B7F;
-    height: 10%;
+  font-family: "Oktoberfest";
+  height: 10%;
+  text-align: center;
+  font-size: 4em;
+  color: white;
+  background-image: url("../img/beersbanner.jpg");
+  background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
-
-.row {
-    height: 80%;
-    background-color: #98B4FF;
+.content {
+  height: 78%;
+  position: relative;
 }
-
-.search-row {
-    text-align: center;
-    background-color: #98B4FF;
-}
-
-input {
-    width: 60%;
-    height: 30px;
-    border-radius: .75em;
-    text-align: center;
-    margin: 1em 0em 1em 0em;
-}
-
-.map-row {
-    margin: 0 auto;
-    text-align: center;
-    display: table;
-}
-
-.map-canvas {
-    width: 100%;
-    height: 400px;
-}
-
-.results-row {
-    margin: 0 auto;
-    height: 50%;
-    display: table;
-    background-color: #98B4FF;
-}
-
 .footer {
-    width: 100%;
-    padding: 1em;
-    background-color: #4E5B7F;
-    background-position: 0% 0%;
-    color: white;
-    font-size: .85em;
-    position: relative;
-    bottom: 0;
-    right: 0;
-    height: 10%;
+  height: 12%;
+  padding: .5em 0 1em .25em;
+  color: white;
+  font-size: 0.9em;
+  font-style: italic;
+  font-weight: bold;
+}
+/* Inside Content Div */
+.search-row {
+  height: 8%;
+  text-align: center;
+}
+.map-row {
+  height: 43%;
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+}
+.results-row {
+  height: 49%;
+  overflow: auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.template {
-    margin: 0 auto;
-    width: 400px;
-    height: 400px;
+/* Inside Searh-Row Div */
+input {
+  width: 60%;
+  height: 1.875em;
+  border-radius: .75em;
+  text-align: center;
+  margin-top: .5em;
+  color: black;
+  font-weight: bold;
 }
 
-.hidden {
-    display: none;
+/* Inside Map-Row Div */
+.map-canvas {
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 50%;
+  padding-top: 1.875em;
+  position: relative;
 }
 
-.contact {
-    list-style: none;
-    font-size: 1em;
-    margin-left: -3.5em;
-    margin-bottom: .25em;
-    /*height: 100%;
-  position: relative;*/
-}
-
+/* Inside Results-Row Div */
 .panel-group .panel+.panel {
-    margin-top: 0;
+  margin-top: 0;
+}
+.panel-group {
+  margin-bottom: 0;
 }
 
-
-/*@font-face {
-    font-family: "My Custom Font";
-    src: url("../assets/fonts/Freakshow.ttf") format("truetype");
+/* Inside Footer */
+.contact {
+  list-style: none;
+  margin-left: -3em;
 }
 
-.customfont {
-    font-family: "My Custom Font", Verdana, Tahoma;
+/* Template */
+.template {
+  margin: 0 auto;
+  width: 25em;
+  height: 25em;
 }
-
-.text {
-
-}*/
+.hidden {
+  display: none;
+}
