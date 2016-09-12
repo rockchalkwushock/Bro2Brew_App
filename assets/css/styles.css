@@ -60,7 +60,12 @@ html, body, .wrapper {
 .search-row {
   height: 8%;
   text-align: center;
+	padding-top: .05em;
 }
+.map_results-container {
+	height: 100%;
+}
+/* Inside Map-Results Div*/
 .map-row {
   height: 43%;
   position: relative;
@@ -73,7 +78,6 @@ html, body, .wrapper {
   padding-left: 0;
   padding-right: 0;
 }
-
 /* Inside Searh-Row Div */
 input {
   width: 60%;
@@ -84,16 +88,14 @@ input {
   color: black;
   font-weight: bold;
 }
-
 /* Inside Map-Row Div */
 .map-canvas {
   height: 0;
   overflow: hidden;
-  padding-bottom: 50%;
+  padding-bottom: 52%;
   padding-top: 1.875em;
   position: relative;
 }
-
 /* Inside Results-Row Div */
 .panel-group .panel+.panel {
   margin-top: 0;
@@ -101,13 +103,11 @@ input {
 .panel-group {
   margin-bottom: 0;
 }
-
 /* Inside Footer */
 .contact {
   list-style: none;
   margin-left: -3em;
 }
-
 /* Template */
 .template {
   margin: 0 auto;
