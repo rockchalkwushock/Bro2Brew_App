@@ -21,7 +21,7 @@ function showMap(latLng) {
         center: latLng,
         zoom: 10,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        draggable: true,
+        draggable: false,
         scrollwheel: false,
         disableDefaultUI: true,
         styles: [{
