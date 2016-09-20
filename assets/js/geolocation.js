@@ -1,9 +1,14 @@
+/*jshint esversion: 6 */
 // ########################################
 /*
  *	Table of Contents
- *	1)	geolocate( )
- *	2)	showPositionByGeo( )
- *	3)	showError( )
+ *  1) Webpack Assignments
+ *      a) userIP
+ *      b) showMap
+ *      c) addNearbyPlaces
+ *	2)	geolocate( )
+ *	3)	showPositionByGeo( )
+ *	4)	showError( )
  */
 // ########################################
 
@@ -23,27 +28,31 @@
    In the even that geoloction is not supported by the browser the user's IP
    address will be acquired and processed inside ip_geolocation.js.
 */
+/* ---------- 1) Webpack Assignments ---------- */
 
-/* ---------- 1) geolocate ---------- */
+let userIP = require('./assets/js/ip_geolocation.js');
+let showMap = require('./assets/js/map.js');
+let addNearbyPlaces = require('./assets/js/places.js');
+
+/* ---------- 2) geolocate ---------- */
 
 function geolocate() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPositionByGeo);
     } else {
-      console.log('geolocate failed');
       userIP();
     }
 }
 
-/* ---------- 2) showPositionByGeo ---------- */
+/* ---------- 3) showPositionByGeo ---------- */
 
 function showPositionByGeo(position) {
     // The Lat & Long values are obtained via the HTML 5 API.
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
 
     // Creates a new object for using Lat & Long values with Google Map.
-    var latLng = new google.maps.LatLng(latitude, longitude);
+    let latLng = new google.maps.LatLng(latitude, longitude);
 
     // Calls function.
     showMap(latLng);
@@ -51,7 +60,7 @@ function showPositionByGeo(position) {
     addNearbyPlaces(latLng);
 }
 
-/* ---------- 3) showError ---------- */
+/* ---------- 4) showError ---------- */
 
 function showError(error) {
     switch (error.code) {

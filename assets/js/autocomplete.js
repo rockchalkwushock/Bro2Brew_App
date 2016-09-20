@@ -1,8 +1,14 @@
+/*jshint esversion: 6 */
 // ########################################
 /*
  *	Table of Contents
- *	1)	initAutocomplete( )
- *	2)	captureLocation( )
+ *  1)  Webpack Assignments
+ *      a) geocode
+ *      b) reset
+ *	2)	initAutocomplete( )
+ *	3)	captureLocation( )
+ *  4)  Module.exports
+ *      a) initAutocomplete
  */
 // ########################################
 
@@ -16,13 +22,17 @@
     it's parameters. The object's data is then passed via the 'places' variable
     to extract further information for gecoding in gecoding.js.
  */
+/* ---------- 1) Webpack Assignments ---------- */
 
-/* ---------- 1) initAutocomplete ---------- */
+let geocode = require('./assets/js/geocoding.js');
+let reset = require('./assets/js/autocomplete.js');
+
+/* ---------- 2) initAutocomplete ---------- */
 
 function initAutocomplete() {
     reset();
-    var input = document.getElementById('searchTextField'); // HTML input type=text where Autocomplete will render.
-    var options = {
+    let input = document.getElementById('searchTextField'); // HTML input type=text where Autocomplete will render.
+    let options = {
         types: ['geocode'], // instructs the Places service to return only geocoding results, rather than business results.
     };
 
@@ -31,7 +41,7 @@ function initAutocomplete() {
     autocomplete.addListener('place_changed', captureLocation);
 }
 
-/* ---------- 2) captureLocation ---------- */
+/* ---------- 3) captureLocation ---------- */
 
 function captureLocation() {
     // Store the 'autocomplete' object.
@@ -41,3 +51,7 @@ function captureLocation() {
     // Calls function.
     geocode(coords);
 }
+
+/* ---------- 4) Module.exports ---------- */
+
+module.exports = initAutocomplete;

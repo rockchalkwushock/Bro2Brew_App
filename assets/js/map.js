@@ -1,7 +1,10 @@
+/*jshint esversion: 6 */
 // ########################################
 /*
  *	Table of Contents
  *	1)	showMap( )
+ *	2)	Module.exports
+ *	    a) showMap
  */
 // ########################################
 
@@ -17,7 +20,7 @@
 // Renders the map to DOM.
 function showMap(latLng) {
     // Setting up availble options for map.
-    var mapOptions = {
+    let mapOptions = {
         center: latLng,
         zoom: 10,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -40,3 +43,7 @@ function showMap(latLng) {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     inputField.val('');
 }
+
+/* ---------- 2) Module.exports ---------- */
+
+module.exports = showMap;

@@ -1,7 +1,13 @@
+/*jshint esversion: 6 */
 // ########################################
 /*
  *	Table of Contents
- *	1)	geocode( )
+ *	1)	Webpack Assignments
+ *      a) showMap
+ *      b) addNearbyPlaces
+ *	2)	geocode( )
+ *	3)	Module.exports
+ *	    a) geocode
  */
 // ########################################
 
@@ -13,19 +19,27 @@
 
     NOTE: geocode( ) is in no way related to the geocoder( ) by Google.
 */
+/* ---------- 1) Webpack Assignments ---------- */
 
-/* ---------- 1) geocode ---------- */
+let showMap = require('./assets/js/map.js');
+let addNearbyPlaces = require('./assets/js/places.js');
+
+/* ---------- 2) geocode ---------- */
 
 function geocode(coords) {
 
-    var latitude = coords.lat();
+    let latitude = coords.lat();
 
-    var longitude = coords.lng();
+    let longitude = coords.lng();
     // Creates a new object for using Lat & Long values with Google Map.
-    var latLng = new google.maps.LatLng(latitude, longitude);
+    let latLng = new google.maps.LatLng(latitude, longitude);
 
     // Calls function.
     showMap(latLng);
     // Calls function.
     addNearbyPlaces(latLng);
 }
+
+/* ---------- 3) Module.exports ---------- */
+
+module.exports = geocode;

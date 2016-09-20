@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // ########################################
 /*
 *	Table of Contents
@@ -11,6 +12,8 @@
 *     b) callbackDetails( )
 *	4)	Event Handlers & Info Box
 *     a) windowInfoCreate( )
+* 5)  Module.exports
+*     a) addNearbyPlaces
 */
 // ########################################
 
@@ -30,10 +33,7 @@
     NOTE: The .includes() method from the toString() Constructor is not supported
     in IE+9 & Opera at this time (06September2016) via MDN:
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes
-
-
 */
-
 
 // ####################################################
 /* ---------- Google Places Library Calls ---------- */
@@ -43,7 +43,7 @@
 
 function addNearbyPlaces(latLng)
 {
-  var request =
+  let request =
   {
     // Google Places REQUIRES Lat & Long coords to find XYZ.
     location: latLng,
@@ -54,7 +54,7 @@ function addNearbyPlaces(latLng)
 
   // Accessing PlacesService Library through the Constructor PlacesService
   // by creating new instance of object called nearByService.
-  var nearByService = new google.maps.places.PlacesService(map);
+  let nearByService = new google.maps.places.PlacesService(map);
   // Using prototype nearbySearch from Constructor PlacesService.
   nearByService.nearbySearch(request, callbackResults);
 }
@@ -69,20 +69,20 @@ function callbackResults(results, status)
   bounds = new google.maps.LatLngBounds();
   if (status == google.maps.places.PlacesServiceStatus.OK)
   {
-    for (var i = 0; i < results.length; i++)
+    for (let i = 0; i < results.length; i++)
     {
-      var place = results[i]; // store brewery result object.
-      var placeid = place.place_id; // store Google place_id.
-      var name = place.name;  // store name of brewery.
-      var markerLat = place.geometry.location.lat();  // store latitude of brewery.
-      var markerLng = place.geometry.location.lng();  // store longitude of brewery.
+      let place = results[i]; // store brewery result object.
+      let placeid = place.place_id; // store Google place_id.
+      let name = place.name;  // store name of brewery.
+      let markerLat = place.geometry.location.lat();  // store latitude of brewery.
+      let markerLng = place.geometry.location.lng();  // store longitude of brewery.
 
       // TEMPORARY FIX: .includes( ) is not supported in IE (MDN).
       // Also is not supported on mobile browsers: IE & Android.
       if (name.includes("Brewery") || name.includes("Brewing"))
       {
         // Creates new instance of Google's LatLng Constructor for each brewery.
-        var myLatLng = new google.maps.LatLng(markerLat, markerLng);
+        let myLatLng = new google.maps.LatLng(markerLat, markerLng);
         // Calls function.
         apiMarkerCreate(myLatLng, place);
         // Calls function.
@@ -111,7 +111,7 @@ function callbackResults(results, status)
 function apiMarkerCreate(myLatLng, placeResult)
 {
   if(!placeResult) return;
-  var markerOptions =
+  let markerOptions =
   {
     // Google Places REQUIRES Lat & Long coords to place marker at XYZ.
     position: myLatLng,
@@ -122,9 +122,9 @@ function apiMarkerCreate(myLatLng, placeResult)
   };
 
   // Setting up the marker object to mark the location on the map canvas.
-  var marker = new google.maps.Marker(markerOptions);
+  let marker = new google.maps.Marker(markerOptions);
   marker.placeResult = placeResult;
-  var content;
+  let content;
   if (placeResult)
   {
     // Displays name of brewery when marker is moused over.
@@ -142,14 +142,14 @@ function apiMarkerCreate(myLatLng, placeResult)
 // This function will get the JSON for the results of the search.
 function addPlaceDetails(brewery_id)
 {
-  var parameters =
+  let parameters =
   {
     placeId: brewery_id,
   };
 
   // Accessing PlacesService Library through the Constructor PlacesService
   // by creating new instance of object called serviceDetails.
-  var serviceDetails = new google.maps.places.PlacesService(map);
+  let serviceDetails = new google.maps.places.PlacesService(map);
   // Using prototype nearbySearch from Constructor PlacesService.
   serviceDetails.getDetails(parameters, callbackDetails);
 }
@@ -161,7 +161,7 @@ function addPlaceDetails(brewery_id)
 function callbackDetails(brewery_data)
 {
   resultsScreen.show();
-  var span = $('.template .panel').clone();
+  let span = $('.template .panel').clone();
   span.find('#result-name').html(brewery_data.name);
   span.find('#result-address').html(brewery_data.vicinity);
   span.find('#result-phone').html(brewery_data.formatted_phone_number);
@@ -219,13 +219,13 @@ function callbackDetails(brewery_data)
 
 function windowInfoCreate(marker, latLng, content)
 {
-  var infoWindowOptions =
+  let infoWindowOptions =
   {
     content: content,
     position: latLng
   };
 
-  var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+  let infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 
   marker.addListener('mouseover', function()
   {
@@ -239,10 +239,9 @@ function windowInfoCreate(marker, latLng, content)
 
   marker.addListener('click', function()
   {
-      var height_data = $('.header').height() + $('.search-row').height() + $('.map-row').height();
+      let height_data = $('.header').height() + $('.search-row').height() + $('.map-row').height();
       $('#linkcollapse' + marker.placeResult.id).click();
       $('#results-row').animate({scrollTop: $('#linkcollapse' + marker.placeResult.id).offset().top-height_data}, 500);
-      console.log($('#linkcollapse' + marker.placeResult.id).offset().top);
   });
 
   resultsScreen.on('click', '.back2top', function(event)
@@ -253,3 +252,9 @@ function windowInfoCreate(marker, latLng, content)
     $(this).parent().parent().parent().find('.panel-title a').click();
   });
 }
+
+// #######################################
+/* ---------- Module.exports ---------- */
+// #######################################
+
+module.exports = addNearbyPlaces;
